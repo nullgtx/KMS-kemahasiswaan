@@ -1,10 +1,7 @@
-@extends('member.master')
+@extends('admin.master')
 
 @section('content')
-
-
-    @inclue('member.profile._header')
-    @include('layouts.dashboard._alert')
+    @include('admin.articles._header')
 
     <div class="container-fluid">
         <div class="row">
@@ -13,17 +10,17 @@
                     <div class="card rounded-0">
                         <div class="card-header">
                             <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                                Ubah Profile Mahaasiswa
+                                Tambah Berita
                             </h4>
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('member.profile.update') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
-                            @include('member.profile._form', ['update' => true])
+                            @include('admin.articles._form', ['update' => false])
 
-                                <button type="submit" class="btn btn-success">Update Profile</button>
+                                <button type="submit" class="btn btn-success">Simpan Berita</button>
+                                <a href="{{ route('admin.articles.index') }}" class="btn btn-link">Batal</a>
                             </form>
                         </div>
                     </div>

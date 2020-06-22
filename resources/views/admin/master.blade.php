@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/font-awesome/css/font-awesome.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -169,6 +172,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.articles.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="text">Manajemen Berita</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.profile.index') }}" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p class="text">Ubah Pengguna</p>
@@ -220,6 +229,11 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ url('/') }}/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="{{ url('/') }}/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- ChartJS -->
 <script src="{{ url('/') }}/AdminLTE/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -244,5 +258,6 @@
 <script src="{{ url('/') }}/AdminLTE/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('/') }}/AdminLTE/dist/js/demo.js"></script>
+@stack('scripts')
 </body>
 </html>

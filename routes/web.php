@@ -41,6 +41,9 @@ Route::group(['middleware'=>['auth']], function(){
 
                     Route::get('profile', 'ProfileController@index')->name('admin.profile.index');
                     Route::put('profile', 'ProfileController@update')->name('admin.profile.update');
+
+                    Route::resource('articles', 'ArticlesController', ['as' => 'admin']);
+                    Route::get('articles-data', 'ArticlesController@data')->name('admin.articles.data');
     
                 });
             });
