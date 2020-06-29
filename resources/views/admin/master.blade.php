@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+  @stack('head')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -169,6 +170,18 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
               <i class="nav-icon fa fa-tachometer"></i>
               <p class="text">Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.admins.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p class="text">Manajemen Admin</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.members.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p class="text">Manajemen Mahasiswa</p>
             </a>
           </li>
           <li class="nav-item">

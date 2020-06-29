@@ -20,7 +20,6 @@ Route::get('/coba', function () {
 });
 
 
-
 Route::group(['middleware' => ['guest']], function () {    
 	Route::get('login', 'AuthController@login')->name('login');
     Route::post('login', 'AuthController@ceklogin')->name('login');
@@ -41,6 +40,12 @@ Route::group(['middleware'=>['auth']], function(){
 
                     Route::get('profile', 'ProfileController@index')->name('admin.profile.index');
                     Route::put('profile', 'ProfileController@update')->name('admin.profile.update');
+
+                    Route::resource('admins', 'AdminsController', ['as' => 'admin'])->except('show');
+                    Route::get('admins-data', 'AdminsController@data')->name('admin.admins.data');
+
+                    Route::resource('members', 'MembersController', ['as' => 'admin'])->except('show');
+                    Route::get('members-data', 'MembersController@data')->name('admin.members.data');
 
                     Route::resource('articles', 'ArticlesController', ['as' => 'admin']);
                     Route::get('articles-data', 'ArticlesController@data')->name('admin.articles.data');
