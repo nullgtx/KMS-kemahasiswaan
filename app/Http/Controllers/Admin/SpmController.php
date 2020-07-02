@@ -130,7 +130,8 @@ class SpmController extends Controller
                                     csrf_field().method_field('DELETE');
                    
                     $action =  '<a href="'.route('admin.spm.edit', $spm->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
-                                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    <a href="/img/'. $spm->image. '" target="_blank" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
+                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$action.$form_end;
