@@ -185,6 +185,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.spm.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-book"></i>
+              <p class="text">Manajemen Dokumen SOP</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.articles.index') }}" class="nav-link">
               <i class="nav-icon fa fa-tachometer"></i>
               <p class="text">Manajemen Berita</p>

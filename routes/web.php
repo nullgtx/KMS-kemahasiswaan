@@ -47,6 +47,9 @@ Route::group(['middleware'=>['auth']], function(){
                     Route::resource('members', 'MembersController', ['as' => 'admin'])->except('show');
                     Route::get('members-data', 'MembersController@data')->name('admin.members.data');
 
+                    Route::resource('spm', 'SpmController', ['as' => 'admin']);
+                    Route::get('spm-data', 'SpmController@data')->name('admin.spm.data');
+
                     Route::resource('articles', 'ArticlesController', ['as' => 'admin']);
                     Route::get('articles-data', 'ArticlesController@data')->name('admin.articles.data');
     
