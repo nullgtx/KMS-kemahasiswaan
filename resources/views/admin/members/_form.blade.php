@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label for="nim">No Akun</label>
+    <label for="nim">NIM</label>
     <input type="text" class="form-control @error('nim') is-invalid @enderror" 
     id="nim" name="nim" value="{{ old('nim', $update ? $member->nim:'') }}" required>
 

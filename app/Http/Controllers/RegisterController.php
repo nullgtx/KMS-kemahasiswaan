@@ -42,7 +42,7 @@ class RegisterController extends Controller
             //create member
             $member = $user->member()->create($data);
             
-            Mail::to($member->user->email)->send(new WaitingEmail($member));                
+            //Mail::to($member->user->email)->send(new WaitingEmail($member));                
             
 
             return redirect()->route('register')->with('success', 'Akun berhasil disimpan dan akan dilakukan validasi dan konfirmasi');

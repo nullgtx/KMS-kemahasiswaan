@@ -12,7 +12,7 @@ class Article extends Model
     const ARTICLE_IMAGE_DEFAULT = 'article.png';
 
     protected $fillable = ['title', 'content', 'image'];
-    
+
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
