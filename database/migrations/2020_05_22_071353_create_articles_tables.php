@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Admin;
 
-class CreateAdminsTable extends Migration
+class CreateArticlesTables extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +13,16 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('level')->default(Admin::ADMIN_LEVEL_ADMIN);
-            $table->string('position');
+            $table->unsignedBigInteger('admin_id');
+            $table->string('title');
+            $table->string('slug');
+            $table->longText('content');
+            $table->string('image');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->foreign('admin_id')->references('id')->on('admins')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });
@@ -34,6 +35,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('articles');
     }
 }

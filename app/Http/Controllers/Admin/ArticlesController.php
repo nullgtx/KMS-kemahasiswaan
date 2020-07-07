@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\Articles\ArticlesStore;
 use App\Http\Requests\Admin\Articles\ArticlesUpdate;
@@ -39,13 +41,15 @@ class ArticlesController extends Controller
      */
     public function store(ArticlesStore $request)
     {
-        $data = $request->all();
+        $data = $request->except('admin_id');
+        $data['admin_id'] = Auth::user()->admin->id;
 
         //upload photo
         if($request->image)
         {
-            $image_path = $request->image->store('articles', 'images');
-            $data['image'] = $image_path;
+            $file = $request->image;
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('berita', $filename, 'images');
         }else{
             $data['image'] = Article::ARTICLE_IMAGE_DEFAULT;
         }
@@ -80,7 +84,9 @@ class ArticlesController extends Controller
      */
     public function update(ArticlesUpdate $request, Article $article)
     {
-        $data = $request->all();
+        $file = $request->image;
+        $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+        $data['image'] = $file->storeAs('berita', $filename, 'images');
 
         //upload photo
         if($request->image)

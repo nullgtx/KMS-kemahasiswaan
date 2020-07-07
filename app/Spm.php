@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Spm extends Model
 {
-
-    protected $table = 'spm';
     
     const ARTICLE_IMAGE_URL = '/img';
     const ARTICLE_IMAGE_DEFAULT = 'article.png';
@@ -17,7 +15,12 @@ class Spm extends Model
     const KATEGORI_BEASISWA = 'beasiswa';
     const KATEGORI_PKM = 'pkm';
 
-    protected $fillable = ['title', 'level', 'image'];
+    protected $fillable = ['admin_id', 'title', 'level', 'image'];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
     
     public function setTitleAttribute($value)
     {

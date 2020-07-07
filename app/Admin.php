@@ -19,4 +19,14 @@ class Admin extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function article()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function spm()
+    {
+        return $this->hasMany(Spm::class);
+    }
 }

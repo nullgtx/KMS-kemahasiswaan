@@ -6,6 +6,7 @@ use App\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\Admins\AdminsStore;
 use App\Http\Requests\Admin\Admins\AdminsUpdate;
@@ -113,8 +114,9 @@ class AdminsController extends Controller
         //upload photo
         if($request->photo)
         {
-            $photo_path = $request->photo->store('photos', 'images');
-            $data['photo'] = $photo_path;
+            $file = $request->photo;
+            $filename = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();            
+            $data['photo'] = $file->storeAs('photos', $filename, 'images');
             $admin->user->deletePhoto();
         }
 

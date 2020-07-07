@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Admin\Profile\ProfileUpdate;
 
@@ -30,8 +31,9 @@ class ProfileController extends Controller
         //upload photo
         if($request->photo)
         {
-            $photo_path = $request->photo->store('photos', 'images');
-            $data['photo'] = $photo_path;
+            $file = $request->photo;
+            $filename = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();            
+            $data['photo'] = $file->storeAs('photos', $filename, 'images');
             $admin->user->deletePhoto();
         }
 

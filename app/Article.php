@@ -11,7 +11,12 @@ class Article extends Model
     const ARTICLE_IMAGE_URL = '/img';
     const ARTICLE_IMAGE_DEFAULT = 'article.png';
 
-    protected $fillable = ['title', 'content', 'image'];
+    protected $fillable = ['admin_id', 'title', 'content', 'image'];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 
     public function setTitleAttribute($value)
     {

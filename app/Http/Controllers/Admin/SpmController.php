@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Spm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\Spm\SpmStore;
 use App\Http\Requests\Admin\Spm\SpmUpdate;
@@ -39,13 +41,15 @@ class SpmController extends Controller
      */
     public function store(SpmStore $request)
     {
-        $data = $request->all();
+        $data = $request->except('admin_id');
+        $data['admin_id'] = Auth::user()->admin->id;
 
         //upload file
         if($request->image)
         {
-            $image_path = $request->image->store('spm', 'images');
-            $data['image'] = $image_path;
+            $file = $request->image;
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('spm', $filename, 'images');
         }else{
             $data['image'] = Spm::ARTICLE_IMAGE_DEFAULT;
         }
@@ -80,13 +84,15 @@ class SpmController extends Controller
      */
     public function update(SpmUpdate $request, Spm $spm)
     {
-        $data = $request->all();
+        $data = $request->except('admin_id');
+        $data['admin_id'] = Auth::user()->admin->id;
 
         //upload file
         if($request->image)
         {
-            $image_path = $request->image->store('spm', 'images');
-            $data['image'] = $image_path;
+            $file = $request->image;
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('spm', $filename, 'images');
             $spm->deleteImage();
         }
 
