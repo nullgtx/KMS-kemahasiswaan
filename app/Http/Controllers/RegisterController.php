@@ -45,9 +45,9 @@ class RegisterController extends Controller
             //Mail::to($member->user->email)->send(new WaitingEmail($member));                
             
 
-            return redirect()->route('register')->with('success', 'Akun berhasil disimpan dan akan dilakukan validasi dan konfirmasi');
+            return redirect()->route('login')->with('success', 'Akun berhasil dibuat');
         }else{
-            return redirect()->route('register')->with('fail', 'Akun gagal divalidasi');
+            return redirect()->route('register')->with('fail', 'Akun gagal dibuat');
         }
 
     }
