@@ -52,6 +52,11 @@ Route::group(['middleware'=>['auth']], function(){
 
                     Route::resource('articles', 'ArticlesController', ['as' => 'admin']);
                     Route::get('articles-data', 'ArticlesController@data')->name('admin.articles.data');
+
+                    Route::resource('knowledge', 'KnowledgeController', ['as' => 'admin'])->only(['index', 'destroy']);
+                    Route::get('knowledge-data', 'KnowledgeController@data')->name('admin.knowledge.data');
+                    Route::get('knowledge-confirm/{knowledge}', 'KnowledgeController@confirm')->name('admin.knowledge.confirm');
+
     
                 });
             });
@@ -64,6 +69,9 @@ Route::group(['middleware'=>['auth']], function(){
 
                 Route::get('profile', 'ProfileController@index')->name('member.profile.index');
                 Route::put('profile', 'ProfileController@update')->name('member.profile.update');
+
+                Route::resource('knowledge', 'KnowledgeController', ['as' => 'member']);
+                Route::get('knowledge-data', 'KnowledgeController@data')->name('member.knowledge.data');
     
                 });
             });

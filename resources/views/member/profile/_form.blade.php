@@ -1,7 +1,7 @@
 <div class="form-group">
-        <label for="nim">No Akun</label>
+        <label for="nim">NIM</label>
         <input type="text" class="form-control @error('nim') is-invalid @enderror" 
-        id="nim" name="nim" value="{{ old('nim', $update ? $member->nim:'') }}" required>
+        id="nim" name="nim" value="{{ old('nim', $update ? $member->nim:'') }}" readonly >
     
         @error('nim')
         <div class="invalid-feedback">
@@ -23,7 +23,7 @@
     </div>
     
     <div class="form-group">
-        <label for="password">Phone Password</label>
+        <label for="password">Password</label>
         <input type="password" class="form-control @error('password') is-invalid @enderror" 
         id="password" name="password" @if(!$update) required @endif>
     
@@ -37,7 +37,7 @@
     </div>
     
     <div class="form-group">
-        <label for="password_confirmation">Ulangi Password</label>
+        <label for="password_confirmation">Konfirmasi Password</label>
         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" 
         id="password_confirmation" name="password_confirmation" @if(!$update) required @endif>
     
@@ -72,7 +72,7 @@
             
             <div class="media-body">
                 <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" id="photo">
-                @if($update) <p class="help-block">Kosongkan bila tidak ingin mengganti foto</p> @endif
+                @if($update) <p class="help-block">Kosongkan bila tidak ingin mengganti foto. ukuran max @2mb</p> @endif
 
                 @error('photo')
                 <div class="invalid-feedback">

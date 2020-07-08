@@ -29,4 +29,5 @@ class Admin extends Model
     {
         return $this->hasMany(Spm::class);
     }
+    
 }

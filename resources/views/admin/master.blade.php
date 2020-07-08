@@ -197,6 +197,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.knowledge.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="text">Manajemen Pengetahuan</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.profile.index') }}" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p class="text">Ubah Pengguna</p>
