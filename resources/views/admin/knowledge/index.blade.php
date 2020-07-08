@@ -12,7 +12,7 @@
                     <div class="card rounded-0">
                         <div class="card-header">
                             <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                                Data Pengetahuan Mahasiswa
+                                Dokumen Pengetahuan Mahasiswa
                             </h4>
                         </div>
                         <div class="card-body">
