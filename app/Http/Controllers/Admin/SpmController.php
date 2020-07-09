@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Spm;
+use App\Admin;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;

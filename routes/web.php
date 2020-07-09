@@ -57,6 +57,12 @@ Route::group(['middleware'=>['auth']], function(){
                     Route::get('knowledge-data', 'KnowledgeController@data')->name('admin.knowledge.data');
                     Route::get('knowledge-confirm/{knowledge}', 'KnowledgeController@confirm')->name('admin.knowledge.confirm');
 
+                    Route::resource('forum', 'ForumController', ['as' => 'admin']);
+                    Route::get('forum', 'ForumController@index')->name('admin.forum.index');
+                    Route::get('forum/view/{forum}', 'ForumController@view')->name('admin.forum.view');
+                    Route::post('forum/view/{forum}/komentar', 'KomentarController@store')->name('admin.komentar.store');
+                    Route::delete('forum/view/{forum}/komentar', 'KomentarController@destroy')->name('admin.komentar.destroy');
+
     
                 });
             });

@@ -57,7 +57,7 @@ class KnowledgeController extends Controller
      */
     public function data()
     {
-        $knowledge = Knowledge::latest()->get();
+        $knowledge = Knowledge::with('member.user')->latest()->get();
         return DataTables::of($knowledge)
                 ->addIndexColumn()
                 ->addColumn('action', function ($knowledge) {

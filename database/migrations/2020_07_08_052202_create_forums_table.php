@@ -20,7 +20,6 @@ class CreateForumsTable extends Migration
             $table->string('slug');
             $table->longText('content');
             $table->string('level');
-            $table->string('image');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

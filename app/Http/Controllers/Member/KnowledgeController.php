@@ -48,15 +48,19 @@ class KnowledgeController extends Controller
      */
     public function store(KnowledgeStore $request)
     {
-        $data = $request->only(['title', 'level', 'image']);
-
+        $data = $request->except('member_id');
         $data['member_id'] = Auth::user()->member->id;
         $data['confirmed'] = Knowledge::KNOWLEDGE_STATUS_NOT_CONFIRMED;
 
-        //upload image
-        $file = $request->image;
-        $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-        $data['image'] = $file->storeAs('knowledge', $filename, 'images');
+        //upload file
+        if($request->image)
+        {
+            $file = $request->image;
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('knowledge', $filename, 'images');
+        }else{
+            $data['image'] = Spm::ARTICLE_IMAGE_DEFAULT;
+        }
 
         $knowledge = Knowledge::create($data);
         if($knowledge)
@@ -78,7 +82,7 @@ class KnowledgeController extends Controller
      */
     public function edit(Knowledge $knowledge)
     {
-        return view('admin.knowledge.edit', compact('knowledge'));
+        return view('member.knowledge.edit', compact('knowledge'));
     }
 
     /**
@@ -90,8 +94,7 @@ class KnowledgeController extends Controller
      */
     public function update(knowledgeUpdate $request, Knowledge $knowledge)
     {
-        $data = $request->only(['title', 'level', 'image']);
-
+        $data = $request->except('member_id');
         $data['member_id'] = Auth::user()->member->id;
         $data['confirmed'] = Knowledge::KNOWLEDGE_STATUS_NOT_CONFIRMED;
 
@@ -101,16 +104,16 @@ class KnowledgeController extends Controller
             $file = $request->image;
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
             $data['image'] = $file->storeAs('knowledge', $filename, 'images');
-
-            $knowledge = Knowledge::create($data);
             $knowledge->deleteImage();
+        }else{
+            $data['image'] = Knowledge::ARTICLE_IMAGE_DEFAULT;
         }
 
         if($knowledge->update($data))
         {
-            return redirect()->route('admin.knowledge.index')->with('success', 'Pengetahuan berhasil diubah');
+            return redirect()->route('member.knowledge.index')->with('success', 'Pengetahuan berhasil diubah');
         }else{
-            return redirect()->route('admin.knowledge.index')->with('fail', 'Pengetahuan gagal diubah');
+            return redirect()->route('member.knowledge.index')->with('fail', 'Pengetahuan gagal diubah');
         }
     }
 

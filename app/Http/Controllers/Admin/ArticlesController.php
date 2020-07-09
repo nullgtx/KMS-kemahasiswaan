@@ -49,7 +49,7 @@ class ArticlesController extends Controller
         {
             $file = $request->image;
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('berita', $filename, 'images');
+            $data['image'] = $file->storeAs('articles', $filename, 'images');
         }else{
             $data['image'] = Article::ARTICLE_IMAGE_DEFAULT;
         }
@@ -84,15 +84,15 @@ class ArticlesController extends Controller
      */
     public function update(ArticlesUpdate $request, Article $article)
     {
-        $file = $request->image;
-        $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-        $data['image'] = $file->storeAs('berita', $filename, 'images');
+        $data = $request->except('admin_id');
+        $data['admin_id'] = Auth::user()->admin->id;
 
         //upload photo
         if($request->image)
         {
-            $image_path = $request->image->store('articles', 'images');
-            $data['image'] = $image_path;
+            $file = $request->image;
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('articles', $filename, 'images');
             $article->deleteImage();
         }
 

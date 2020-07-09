@@ -28,8 +28,8 @@
 <div class="form-group">
         <label for="level">Kategori Forum</label>
         <select class="form-control @error('level') is-invalid @enderror" name="level" 
-        id="level" @if($update && $forum->user->id==Auth::user()->id) disabled @else required @endif>
-            <option value="">-- Pilih Level --</option>
+        id="level" @if($update && $forum->user->id==Auth::user()->id) @else required @endif>
+            <option value="">-- Pilih Kategori --</option>
             <option value="{{ \App\Forum::KATEGORI_BEASISWA }}" 
                 @if($update && $forum->level==\App\Forum::KATEGORI_BEASISWA) selected @endif>Beasiswa</option>
             <option value="{{ \App\Forum::KATEGORI_PKM }}" 
@@ -42,31 +42,6 @@
         </div>
         @enderror
     </div>
-
-    <div class="form-group">
-    <label for="image">Gambar</label>
-
-    <div class="media">
-
-        @if($update)
-        <img class="mr-3" style="width: 60px; height: 60px;" src="{{ $forum->image_url }}" alt="Image">
-        @endif
-        
-        <div class="media-body">
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image">
-            @if($update) <p class="help-block">Kosongkan bila tidak ingin mengganti gambar</p> @endif
-
-            @error('image')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-
-        </div>
-
-    </div>
-
-</div>
 
 @push('scripts')
 <script>

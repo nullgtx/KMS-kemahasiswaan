@@ -117,9 +117,9 @@ class ForumController extends Controller
 
         if($forum->update($data))
         {
-            return redirect()->route('admin.forum.index')->with('success', 'Forum berhasil diubah');
+            return redirect()->route('member.forum.index')->with('success', 'Forum berhasil diubah');
         }else{
-            return redirect()->route('admin.forum.index')->with('fail', 'Forum gagal diubah');
+            return redirect()->route('member.forum.index')->with('fail', 'Forum gagal diubah');
         }
     }
 

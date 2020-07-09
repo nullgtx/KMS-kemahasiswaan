@@ -15,12 +15,12 @@
 <div class="form-group">
         <label for="level">Kategori Pengetahuan</label>
         <select class="form-control @error('level') is-invalid @enderror" name="level" 
-        id="level" @if($update && $admin->user->id==Auth::user()->id) disabled @else required @endif>
+        id="level" @if($update && $spm->admin->user->id==Auth::user()->id) @else required @endif>
             <option value="">-- Pilih Level --</option>
             <option value="{{ \App\Spm::KATEGORI_BEASISWA }}" 
-                @if($update && $admin->level==\App\Spm::KATEGORI_BEASISWA) selected @endif>Beasiswa</option>
+                @if($update && $spm->level==\App\Spm::KATEGORI_BEASISWA) selected @endif>Beasiswa</option>
             <option value="{{ \App\Spm::KATEGORI_PKM }}" 
-                @if($update && $admin->level==\App\Spm::KATEGORI_PKM) selected @endif>PKM</option>
+                @if($update && $spm->level==\App\Spm::KATEGORI_PKM) selected @endif>PKM</option>
         </select>
 
         @error('level')

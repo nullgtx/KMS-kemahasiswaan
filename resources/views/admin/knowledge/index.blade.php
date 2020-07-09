@@ -21,6 +21,7 @@
                                 <thead>
                                 <th>No</th>
                                         <th>Judul Dokumen</th>
+                                        <th>Author</th>
                                         <th>Tanggal Post</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -48,6 +49,7 @@ $(function() {
         columns: [
             { data: 'id', name: 'id' },
             { data: 'title', name: 'title' },
+            { data: 'member.user.name', name: 'member.user.name' },
             { data: 'created_at', name: 'created_at' },
             { data: 'status', name: 'status' },
             { data: 'action', name: 'action', orderable: false, searchable: false}

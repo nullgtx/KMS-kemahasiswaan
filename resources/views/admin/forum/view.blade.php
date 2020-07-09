@@ -1,7 +1,7 @@
-@extends('member.master')
+@extends('admin.master')
 
 @section('content')
-@include('member.forum._header')
+@include('admin.forum._header')
 @include('layouts.dashboard._alert')
 
 <div class="container-fluid">
@@ -52,7 +52,7 @@
                       </div>
                       <div class="product-info">
                       @if($komen->user->id==Auth::user()->id)
-                      <form action="{{ route('member.komentar.destroy', $komen->id) }}" method="post">
+                      <form action="{{ route('admin.komentar.destroy', $komen->id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <span class="badge-sm badge-danger float-right"><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fa fa-times"></i></button></span>
@@ -72,7 +72,7 @@
                   </ul>
                   @endforeach
                 </div>
-                <form method="post" action="{{ route('member.komentar.store', $forum) }}" class="form-horizontal">
+                <form method="post" action="{{ route('admin.komentar.store', $forum) }}" class="form-horizontal">
                       @csrf
                         <div class="input-group input-group-sm mb-0">
                           <input id="content" name="content" type="text" class="form-control form-control-sm" placeholder="Tambahkan Komentar ...">

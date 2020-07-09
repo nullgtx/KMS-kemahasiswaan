@@ -5,7 +5,7 @@ namespace App\Http\Requests\Member\Forum;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Forum;
 
-class ArticlesUpdate extends FormRequest
+class ForumUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
