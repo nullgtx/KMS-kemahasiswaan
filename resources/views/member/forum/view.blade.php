@@ -59,7 +59,19 @@
                           <img class="img-circle img-bordered-sm" src="{{$komen->user->photo_url}}" alt="">
                       </div>
                       <div class="product-info">
+                      @if($komen->user->id==Auth::user()->id)
+                      <form action="{{ route('member.komentar.destroy', $komen->id) }}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <span class="badge-sm badge-danger float-right"><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fa fa-times"></i></button></span>
+                      </form>
+                              @else
+                      @endif
+
+                        <span class="username" style="color:#6c757d;font-size:16px;font-weight:600;margin-top:-1px;">
                         {{$komen->user->name}}
+                        </span>
+                        <span class="description" style="color:#6c757d;font-size:13px;margin-top:-3px;">{{$forum->created_at}}</span>
                         <span class="product-description">
                         {{$komen->content}}
                         </span>

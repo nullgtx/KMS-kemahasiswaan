@@ -42,6 +42,7 @@ $(function() {
     $('#knowledge-table').DataTable({
         processing: true,
         serverSide: true,
+        responsive: true,
         ajax: '{{ route('member.knowledge.data') }}',
         columns: [
             //{ data: 'DT_RowIndex', name: 'DT_RowIndex' },

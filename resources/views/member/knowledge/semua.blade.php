@@ -25,12 +25,14 @@
                       <div class="user-block">
                         <img class="img-circle img-bordered-sm" src="{{$know->member->user->photo_url}}" alt="">
                         <span class="username">
+                        <span class="badge badge-primary float-right">{{$know->level}}</span>
+                          
+                          <a href="#">{{$know->member->user->name}}</a>
                           @if($know->confirmed=='1')
                             <span class="badge badge-info float-right">Sudah Tervalidasi</span>
                               @else
                               <span class="badge badge-warning float-right">Belum Tervalidasi</span>
                           @endif
-                          <a href="#">{{$know->member->user->name}}</a>
                         </span>
                         <span class="description">{{$know->created_at}}</span>
                       </div>

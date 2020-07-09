@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Member\Komentar\KomentarStore;
-use App\Http\Requests\Member\Komentar\KomentarUpdate;
 use Illuminate\Support\Facades\Mail;
 
 class KomentarController extends Controller
@@ -36,6 +35,13 @@ class KomentarController extends Controller
         {
             return redirect()->back()->with('fail', 'komentar gagal ditambahkan');
         }
+    }
+
+    public function destroy($id)
+    {
+        $komentar = Komentar::find($id);
+        $komentar->delete();
+        return redirect()->back()->with('success', 'Komentar berhasil dihapus');
     }
 
 }

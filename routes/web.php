@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/coba', function () {
@@ -81,6 +81,7 @@ Route::group(['middleware'=>['auth']], function(){
                 Route::get('semuaforum', 'ForumController@indexsatu')->name('member.forum.indexsatu');
                 Route::get('semuaforum/view/{forum}', 'ForumController@view')->name('member.forum.view');
                 Route::post('semuaforum/view/{forum}/komentar', 'KomentarController@store')->name('member.komentar.store');
+                Route::delete('semuaforum/view/{forum}/komentar', 'KomentarController@destroy')->name('member.komentar.destroy');
                 Route::get('forum-semuadata', 'ForumController@semuadata')->name('member.forum.semuadata');
 
     

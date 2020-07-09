@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/summernote/summernote-bs4.min.css">
   @stack('head')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
