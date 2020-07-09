@@ -38,6 +38,7 @@
 <script>
 $(function() {
     $('#spm-table').DataTable({
+        responsive: true,
         processing: true,
         serverSide: true,
         ajax: '{{ route('admin.spm.data') }}',

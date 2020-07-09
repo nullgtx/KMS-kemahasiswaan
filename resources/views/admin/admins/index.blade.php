@@ -44,6 +44,7 @@
 <script>
 $(function() {
     $('#admins-table').DataTable({
+        responsive: true,
         processing: true,
         serverSide: true,
         ajax: '{{ route('admin.admins.data') }}',

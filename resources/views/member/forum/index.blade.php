@@ -38,6 +38,7 @@
 <script>
 $(function() {
     $('#forum-table').DataTable({
+        responsive: true,
         processing: true,
         serverSide: true,
         ajax: '{{ route('member.forum.data') }}',
