@@ -188,13 +188,38 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('member.knowledge.indexsatu') }}" class="nav-link">
                   <i class="fa fa-circle nav-icon"></i>
                   <p>Dokumen Pengetahuan</p>
                 </a>
               </li>
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-book"></i>
+              <p>
+                Kelola Diskusi
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('member.forum.index') }}" class="nav-link">
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p>Topik DiskusiKU</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('member.forum.indexsatu') }}" class="nav-link">
+                  <i class="fa fa-circle nav-icon"></i>
+                  <p>Semua Diskusi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a href="{{ route('member.profile.index') }}" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>

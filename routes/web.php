@@ -72,6 +72,18 @@ Route::group(['middleware'=>['auth']], function(){
 
                 Route::resource('knowledge', 'KnowledgeController', ['as' => 'member']);
                 Route::get('knowledge-data', 'KnowledgeController@data')->name('member.knowledge.data');
+                Route::get('semuaknowledge', 'KnowledgeController@indexsatu')->name('member.knowledge.indexsatu');
+                Route::get('knowledge-semuadata', 'KnowledgeController@semuadata')->name('member.knowledge.semuadata');
+
+                
+                Route::resource('forum', 'ForumController', ['as' => 'member']);
+                Route::get('forum-data', 'ForumController@data')->name('member.forum.data');
+                Route::get('semuaforum', 'ForumController@indexsatu')->name('member.forum.indexsatu');
+                Route::get('semuaforum/view/{forum}', 'ForumController@view')->name('member.forum.view');
+                Route::post('semuaforum/view/{forum}/komentar', 'KomentarController@store')->name('member.komentar.store');
+                Route::get('forum-semuadata', 'ForumController@semuadata')->name('member.forum.semuadata');
+
+    
     
                 });
             });

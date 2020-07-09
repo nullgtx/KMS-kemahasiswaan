@@ -51,14 +51,10 @@
 </div>
 
 @push('scripts')
-<!-- CK Editor -->
-<script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-
 <script>
-    var konten = document.getElementById("content");
-      CKEDITOR.replace(konten,{
-      language:'id-ID'
-    });
-    CKEDITOR.config.allowedContent = true;
+  $(function () {
+    // Summernote
+    $('.content').summernote()
+  })
 </script>
 @endpush

@@ -2,7 +2,7 @@
 
 @section('content')
     
-    @include('member.knowledge._header')
+    @include('member.forum._header')
     @include('layouts.dashboard._alert')
     
     <div class="container-fluid">
@@ -12,19 +12,17 @@
                     <div class="card rounded-0">
                         <div class="card-header">
                             <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                               Dokumen Pengetahuan
+                               Topik Diskusi ku
                             </h4>
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('member.knowledge.create') }}" class="btn btn-success" style="margin-bottom: 30px;" ><span class="fa fa-plus"></span> Tambah Dokumen Pengetahuan</a>
+                            <a href="{{ route('member.forum.create') }}" class="btn btn-success" style="margin-bottom: 30px;" ><span class="fa fa-plus"></span> Tambah Topik Diskusi</a>
 
-                            <table class="table table-hover table-sm" id="knowledge-table">
+                            <table class="table table-hover table-sm" id="forum-table">
                                 <thead>
                                         <th>No</th>
-                                        <th>Author</th>
-                                        <th>Judul Dokumen</th>
+                                        <th>Judul Diskusi</th>
                                         <th>Tanggal Post</th>
-                                        <th>Status</th>
                                         <th>Aksi</th>
                                 </thead>
                             </table>
@@ -39,17 +37,14 @@
 @push('scripts')
 <script>
 $(function() {
-    $('#knowledge-table').DataTable({
+    $('#forum-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('member.knowledge.data') }}',
+        ajax: '{{ route('member.forum.data') }}',
         columns: [
-            //{ data: 'DT_RowIndex', name: 'DT_RowIndex' },
-            { data: 'id', name: 'id' },
-            { data: 'member.user.name', name: 'member.user.name' },
+            { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'title', name: 'title' },
             { data: 'created_at', name: 'created_at' },
-            { data: 'status', name: 'status' },
             { data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

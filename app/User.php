@@ -68,6 +68,16 @@ class User extends Authenticatable
         return $this->hasOne(Member::class);
     }
 
+    public function forum()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class);
+    }
+
     public function getActiveInLabelAttribute()
     {
         switch($this->active)

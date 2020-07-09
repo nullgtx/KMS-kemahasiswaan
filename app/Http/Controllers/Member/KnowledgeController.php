@@ -24,6 +24,12 @@ class KnowledgeController extends Controller
         return view('member.knowledge.index');
     }
 
+    public function indexsatu()
+    {
+        $pengetahuan = Knowledge::with('member.user')->latest()->get();
+        return view('member.knowledge.semua',compact('pengetahuan'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
