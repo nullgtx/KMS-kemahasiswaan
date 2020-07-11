@@ -30,8 +30,9 @@ class AuthController extends Controller
         if(Auth::attempt($login))
        {
            return redirect()->route('dashboard');
+       }else {
+            return redirect()->route('login')->with('fail', 'Email atau password yang dimasukan salah');
        }
-       return redirect()->route('login')->with(['error'=>'Email atau password yang dimasukan salah']);
     }
 
     public function cekRole(){
@@ -41,7 +42,7 @@ class AuthController extends Controller
             return redirect()->route('member.dashboard');
         }
         else{
-            return redirect()->route('home');
+            return redirect()->route('/');
         }
     }
 
