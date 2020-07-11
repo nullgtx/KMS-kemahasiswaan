@@ -90,6 +90,12 @@ Route::group(['middleware'=>['auth']], function(){
                 Route::delete('semuaforum/view/{forum}/komentar', 'KomentarController@destroy')->name('member.komentar.destroy');
                 Route::get('forum-semuadata', 'ForumController@semuadata')->name('member.forum.semuadata');
 
+                Route::resource('articles', 'ArticlesController', ['as' => 'member']);
+                Route::get('articles', 'ArticlesController@index')->name('member.articles.index');
+                Route::get('articles/view/{article}', 'ArticlesController@view')->name('member.articles.view');
+                
+                Route::resource('sm', 'SpmController', ['as' => 'member']);
+                Route::get('spm', 'SpmController@index')->name('member.spm.index');
     
     
                 });

@@ -172,6 +172,18 @@
               <p class="text">Dashboard</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('member.articles.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="text">Berita Kemahasiswaan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('member.spm.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="text">Dokumen SOP</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
