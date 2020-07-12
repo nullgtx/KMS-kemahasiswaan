@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Article;
 use App\Admin;
 use App\User;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;

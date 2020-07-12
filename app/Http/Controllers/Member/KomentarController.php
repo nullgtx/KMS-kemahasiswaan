@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Forum;
 use App\User;
 use App\Komentar;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -30,10 +31,10 @@ class KomentarController extends Controller
         if($forum)
         {
             // Mail::to($invoice->member->user->email)->send(new DepositSubmitMail($invoice));
-            return redirect()->back()->with('success', 'komentar telah ditambahkan');
+            return redirect()->back();
         }else
         {
-            return redirect()->back()->with('fail', 'komentar gagal ditambahkan');
+            return redirect()->back();
         }
     }
 
@@ -41,7 +42,7 @@ class KomentarController extends Controller
     {
         $komentar = Komentar::find($id);
         $komentar->delete();
-        return redirect()->back()->with('success', 'Komentar berhasil dihapus');
+        return redirect()->back();
     }
 
 }

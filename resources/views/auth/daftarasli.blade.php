@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('layouts.dashboard._alert')
+
 
 <div class="container">
     <div class="row justify-content-center">

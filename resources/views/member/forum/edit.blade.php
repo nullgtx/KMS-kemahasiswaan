@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('member.forum.update', $forum->id) }}" enctype="multipart/form-data">
+                            <form id="edit" method="POST" action="{{ route('member.forum.update', $forum->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             @include('member.forum._form', ['update' => true])
@@ -30,3 +30,35 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelector('#edit').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Mengubah Topik Diskusi",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Topik Diskusi telah diubah',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Topik Diskusi batal diubah :)", "error");
+          }
+        });
+    });
+  </script>
+  @endpush

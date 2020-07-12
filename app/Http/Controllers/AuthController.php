@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class AuthController extends Controller
        {
            return redirect()->route('dashboard');
        }else {
-            return redirect()->route('login')->with('fail', 'Email atau password yang dimasukan salah');
+            return redirect()->route('login')->with('errors', 'Email atau password yang dimasukan salah');
        }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
+use UxWeb\SweetAlert\SweetAlert;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,7 @@ class ProfileController extends Controller
             $member->update($data);
             return redirect()->route('member.profile.index')->with('success', 'Profil berhasil diubah');
         }else{
-            return redirect()->route('member.profile.index')->with('fail', 'Profil gagal diubah');
+            return redirect()->route('member.profile.index')->with('warning', 'Profil gagal diubah');
         }
     }
 }

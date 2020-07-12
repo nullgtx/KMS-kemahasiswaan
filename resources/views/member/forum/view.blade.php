@@ -2,7 +2,7 @@
 
 @section('content')
 @include('member.forum._header')
-@include('layouts.dashboard._alert')
+
 
 <div class="container-fluid">
         <div class="row">
@@ -55,7 +55,11 @@
                       <form action="{{ route('member.komentar.destroy', $komen->id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <span class="badge-sm badge-danger float-right"><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fa fa-times"></i></button></span>
+                                <span class="badge-sm badge-danger float-right">
+                                  <button  type="submit" class="hapus btn btn-sm btn-danger">
+                                    <i class="fa fa-times"></i>
+                                  </button>
+                                </span>
                       </form>
                               @else
                       @endif
@@ -72,10 +76,10 @@
                   </ul>
                   @endforeach
                 </div>
-                <form method="post" action="{{ route('member.komentar.store', $forum) }}" class="form-horizontal">
+                <form id="simpan" method="post" action="{{ route('member.komentar.store', $forum) }}" class="form-horizontal">
                       @csrf
                         <div class="input-group input-group-sm mb-0">
-                          <input id="content" name="content" type="text" class="form-control form-control-sm" placeholder="Tambahkan Komentar ...">
+                          <input id="content" name="content" type="text" class="form-control form-control-sm" placeholder="Tambahkan Komentar ..." required >
                           <div class="input-group-append">
                             <button type="submit" class="btn btn-success">Simpan komenar</button>
                           </div>
@@ -89,4 +93,66 @@
   </div>
 </div>
 @endsection
+@push('scripts')
+
+<script>
+    $('.hapus').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Komentar",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Komentar telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Komentar batal dihapus :)", "error");
+          }
+        });
+    });
+</script>
+
+<script>
+    document.querySelector('#simpan').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Menambahkan Komentar",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Komentar telah ditambahkan',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Komentar batal ditambahkan :)", "error");
+          }
+        });
+    });
+  </script>
+@endpush
 

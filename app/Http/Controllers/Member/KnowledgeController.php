@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Knowledge;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -69,7 +70,7 @@ class KnowledgeController extends Controller
             return redirect()->route('member.knowledge.index')->with('success', 'Pengetahuan telah ditambahkan');
         }else
         {
-            return redirect()->route('member.knowledge.index')->with('fail', 'Pengetahuan gagal ditambahkan');
+            return redirect()->route('member.knowledge.index')->with('warning', 'Pengetahuan gagal ditambahkan');
         }
 
     }
@@ -113,7 +114,7 @@ class KnowledgeController extends Controller
         {
             return redirect()->route('member.knowledge.index')->with('success', 'Pengetahuan berhasil diubah');
         }else{
-            return redirect()->route('member.knowledge.index')->with('fail', 'Pengetahuan gagal diubah');
+            return redirect()->route('member.knowledge.index')->with('warning', 'Pengetahuan gagal diubah');
         }
     }
 

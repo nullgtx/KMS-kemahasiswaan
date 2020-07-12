@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('member.forum.store') }}" enctype="multipart/form-data">
+                            <form id="simpan" method="POST" action="{{ route('member.forum.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('member.forum._form', ['update' => false])
 
@@ -29,3 +29,35 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelector('#simpan').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Menambahkan Topik Diskusi",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Topik Diskusi telah ditambahkan',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Topik Diskusi batal ditambahkan :)", "error");
+          }
+        });
+    });
+  </script>
+  @endpush

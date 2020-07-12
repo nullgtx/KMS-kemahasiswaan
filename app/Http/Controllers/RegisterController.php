@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use UxWeb\SweetAlert\SweetAlert;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -47,7 +48,7 @@ class RegisterController extends Controller
 
             return redirect()->route('login')->with('success', 'Akun berhasil dibuat');
         }else{
-            return redirect()->route('register')->with('fail', 'Akun gagal dibuat');
+            return redirect()->route('register')->with('warning', 'Akun gagal dibuat');
         }
 
     }

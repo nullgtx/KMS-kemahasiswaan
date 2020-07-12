@@ -3,7 +3,6 @@
 @section('content')
     
     @include('member.forum._header')
-    @include('layouts.dashboard._alert')
     
     <div class="container-fluid">
         <div class="row">
@@ -37,6 +36,35 @@
 @push('scripts')
 <script>
 $(function() {
+    // Delete a record
+    $('#forum-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Topik Diskusi",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Topik Diskusi telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Topik Diskusi batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#forum-table').DataTable({
         responsive: true,
         processing: true,

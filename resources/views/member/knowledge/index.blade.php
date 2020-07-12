@@ -3,7 +3,6 @@
 @section('content')
     
     @include('member.knowledge._header')
-    @include('layouts.dashboard._alert')
     
     <div class="container-fluid">
         <div class="row">
@@ -46,7 +45,7 @@ $(function() {
         ajax: '{{ route('member.knowledge.data') }}',
         columns: [
             //{ data: 'DT_RowIndex', name: 'DT_RowIndex' },
-            { data: 'id', name: 'id' },
+            { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'member.user.name', name: 'member.user.name' },
             { data: 'title', name: 'title' },
             { data: 'created_at', name: 'created_at' },

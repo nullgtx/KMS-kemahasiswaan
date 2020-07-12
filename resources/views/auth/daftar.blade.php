@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-@include('layouts.dashboard._alert')
+
 <div class="register-box">
   <div class="register-logo">
     <a href="#S"><b>KMS</b> Kemahasiswaan</a>

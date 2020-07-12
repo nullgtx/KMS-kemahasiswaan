@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Forum;
 use App\User;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -73,10 +74,10 @@ class ForumController extends Controller
         if($forum)
         {
             // Mail::to($invoice->member->user->email)->send(new DepositSubmitMail($invoice));
-            return redirect()->route('member.forum.index')->with('success', 'Forum telah ditambahkan');
+            return redirect()->route('member.forum.index');
         }else
         {
-            return redirect()->route('member.forum.index')->with('fail', 'Forum gagal ditambahkan');
+            return redirect()->route('member.forum.index')->with('warning', 'Forum gagal ditambahkan');
         }
 
     }
@@ -117,9 +118,9 @@ class ForumController extends Controller
 
         if($forum->update($data))
         {
-            return redirect()->route('member.forum.index')->with('success', 'Forum berhasil diubah');
+            return redirect()->route('member.forum.index');
         }else{
-            return redirect()->route('member.forum.index')->with('fail', 'Forum gagal diubah');
+            return redirect()->route('member.forum.index')->with('warning', 'Forum gagal diubah');
         }
     }
 
@@ -132,8 +133,7 @@ class ForumController extends Controller
     public function destroy(Forum $forum)
     {
         $forum->delete();
-        $forum->deleteImage();
-        return redirect()->back()->with('success', 'Forum berhasil dihapus');
+        return redirect()->back();
     }
 
    
@@ -158,7 +158,7 @@ class ForumController extends Controller
                    
                     $action =  '<a href="'.route('member.forum.edit', $forum->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
                     <a href="'.route('member.forum.view', $forum->id).'" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
-                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    <button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$action.$form_end;
@@ -170,26 +170,4 @@ class ForumController extends Controller
                 ->make(true);
     }
 
-    public function semuadata()
-    {
-        $forum = Forum::with('user')->latest()->get(); 
-        return DataTables::of($forum)
-                ->addIndexColumn()
-                ->addColumn('action', function ($forum) {
-
-                    $form_start = '<form method="POST" class="form-delete" action="'.route('member.forum.destroy', $forum->id).'">'.
-                                    csrf_field().method_field('DELETE');
-                   
-                    $action =  '<a href="/img/'. $forum->image. '" target="_blank" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
-                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
-                    $form_end = '</form>';
-
-                    return $form_start.$action.$form_end;
-                })
-                ->editColumn('created_at', function($forum){
-                    return $forum->created_at->format('d F Y');
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-    }
 }
