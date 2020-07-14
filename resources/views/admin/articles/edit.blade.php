@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('admin.articles.update', $article->id) }}" enctype="multipart/form-data">
+                            <form id="edit" method="POST" action="{{ route('admin.articles.update', $article->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             @include('admin.articles._form', ['update' => true])
@@ -30,3 +30,35 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelector('#edit').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Mengubah Berita",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Berita telah diubah',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Berita batal diubah :)", "error");
+          }
+        });
+    });
+  </script>
+  @endpush

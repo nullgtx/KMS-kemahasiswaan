@@ -14,6 +14,10 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- sweet alert -->
+  <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.css">
+  <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.min.css">
+  <link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="{{ url('/') }}/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -265,6 +269,12 @@
 <script src="{{ url('/') }}/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ url('/') }}/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- sweet alert -->
+<script src="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.all.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="{{ url('/') }}/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- ChartJS -->
 <script src="{{ url('/') }}/AdminLTE/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -290,5 +300,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('/') }}/AdminLTE/dist/js/demo.js"></script>
 @stack('scripts')
+@include('sweet::alert')
 </body>
 </html>

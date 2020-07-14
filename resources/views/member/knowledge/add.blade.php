@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('member.knowledge.store') }}" enctype="multipart/form-data">
+                            <form id="simpan" method="POST" action="{{ route('member.knowledge.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('member.knowledge._form', ['update' => false])
 
@@ -29,3 +29,35 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelector('#simpan').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Menambahkan Pengetahuan",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Pengetahuan telah ditambahkan',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Pengetahuan batal ditambahkan :)", "error");
+          }
+        });
+    });
+  </script>
+  @endpush

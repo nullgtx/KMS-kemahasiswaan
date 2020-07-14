@@ -34,7 +34,7 @@ class KomentarController extends Controller
             return redirect()->back();
         }else
         {
-            return redirect()->back();
+            return redirect()->back()->with('warning', 'komentar gagal ditambahkan');
         }
     }
 

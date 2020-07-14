@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Member;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -74,7 +75,7 @@ class MembersController extends Controller
 
             $user->member->save();
 
-            return redirect()->route('admin.members.index')->with('success', 'Member berhasil ditambahkan');
+            return redirect()->route('admin.members.index');
         }else{
             return redirect()->route('admin.members.index')->with('fail', 'Member gagal ditambahkan');
         }
@@ -130,7 +131,7 @@ class MembersController extends Controller
 
             $member->save();
 
-            return redirect()->route('admin.members.index')->with('success', 'Member berhasil diubah');
+            return redirect()->route('admin.members.index');
         }else{
             return redirect()->route('admin.members.index')->with('fail', 'Member gagal diubah');
         }
@@ -147,7 +148,7 @@ class MembersController extends Controller
         $member->user->deletePhoto();
         $member->user()->delete();
 
-        return redirect()->back()->with('success', 'Member berhasil dihapus');
+        return redirect()->back();
     }
 
     /**
@@ -169,7 +170,7 @@ class MembersController extends Controller
                     $form_start = '<form method="POST" class="form-delete" action="'.route('admin.members.destroy', $members->id).'">'.
                                     csrf_field().method_field('DELETE');
                     $form_body = '<a href="'.route('admin.members.edit', $members->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
-                                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                                    <button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$form_body.$form_end;

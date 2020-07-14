@@ -38,6 +38,35 @@
 @push('scripts')
 <script>
 $(function() {
+    // Delete a record
+    $('#knowledge-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Pengetahuan",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Pengetahuan telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Pengetahuan batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#knowledge-table').DataTable({
         processing: true,
         serverSide: true,

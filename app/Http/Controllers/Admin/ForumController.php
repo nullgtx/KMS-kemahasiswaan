@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forum;
 use App\User;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;

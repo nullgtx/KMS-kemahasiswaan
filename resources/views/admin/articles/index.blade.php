@@ -37,6 +37,35 @@
 @push('scripts')
 <script>
 $(function() {
+    // Delete a record
+    $('#articles-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Berita",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Berita telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Berita batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#articles-table').DataTable({
         responsive: true,
         processing: true,

@@ -37,6 +37,36 @@
 @push('scripts')
 <script>
 $(function() {
+
+    // Delete a record
+    $('#spm-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Dokumen SOP",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Dokumen SOP telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Dokumen SOP batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#spm-table').DataTable({
         responsive: true,
         processing: true,

@@ -52,6 +52,8 @@ Route::group(['middleware'=>['auth']], function(){
 
                     Route::resource('articles', 'ArticlesController', ['as' => 'admin']);
                     Route::get('articles-data', 'ArticlesController@data')->name('admin.articles.data');
+                    Route::get('articles/view/{article}', 'ArticlesController@view')->name('admin.articles.view');
+                    Route::get('semuaarticles', 'ArticlesController@indexsemua')->name('admin.articles.indexsemua');
 
                     Route::resource('knowledge', 'KnowledgeController', ['as' => 'admin'])->only(['index', 'destroy']);
                     Route::get('knowledge-data', 'KnowledgeController@data')->name('admin.knowledge.data');

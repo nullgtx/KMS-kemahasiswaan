@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
+                            <form id="simpan" method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('admin.articles._form', ['update' => false])
 
@@ -29,3 +29,35 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelector('#simpan').addEventListener('submit', function(e) {
+      var form = this;
+      
+      e.preventDefault();
+      
+      swal({
+          title: "Yakin?",
+          text: "Menambahkan Berita",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Berita telah ditambahkan',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Berita batal ditambahkan :)", "error");
+          }
+        });
+    });
+  </script>
+  @endpush

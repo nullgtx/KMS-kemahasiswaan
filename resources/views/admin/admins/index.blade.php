@@ -3,7 +3,6 @@
 @section('content')
 
 @include('admin.admins._header')
-@include('layouts.dashboard._alert')
 
 <div class="container-fluid">
     <div class="row">
@@ -12,7 +11,7 @@
                 <div class="card rounded-0">
                     <div class="card-header">
                         <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                            Data Pengguna Sistem
+                            Data Admin Pengguna Sistem
                         </h4>
                     </div>
                     <div class="card-body">
@@ -24,7 +23,6 @@
                                         <th>Email</th>
                                         <th>Nama</th>
                                         <th>Jabatan</th>
-                                        <th>Hak Akses</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                 </thead>
@@ -43,6 +41,35 @@
 @push('scripts')
 <script>
 $(function() {
+    // Delete a record
+    $('#admins-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Data Admin",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Data Admin telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Data Admin batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#admins-table').DataTable({
         responsive: true,
         processing: true,
@@ -53,7 +80,6 @@ $(function() {
             { data: 'user.email', name: 'user.email' },
             { data: 'user.name', name: 'user.name' },
             { data: 'position', name: 'position' },
-            { data: 'level', name: 'level' },
             { data: 'status', name: 'status' },
             { data: 'action', name: 'action', orderable: false, searchable: false}
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Spm;
 use App\Admin;
 use App\User;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -59,7 +60,7 @@ class SpmController extends Controller
         $spm = Spm::create($data);
         if($spm)
         {
-            return redirect()->route('admin.spm.index')->with('success', 'Dokumen berhasil ditambahkan');
+            return redirect()->route('admin.spm.index');
         }else{
             return redirect()->route('admin.spm.index')->with('fail', 'Dokumen gagal ditambahkan');
         }
@@ -100,7 +101,7 @@ class SpmController extends Controller
 
         if($spm->update($data))
         {
-            return redirect()->route('admin.spm.index')->with('success', 'Dokumen berhasil diubah');
+            return redirect()->route('admin.spm.index');
         }else{
             return redirect()->route('admin.spm.index')->with('fail', 'Dokumen gagal diubah');
         }
@@ -116,7 +117,7 @@ class SpmController extends Controller
     {
         $spm->delete();
         $spm->deleteImage();
-        return redirect()->back()->with('success', 'Dokumen berhasil dihapus');
+        return redirect()->back();
     }
 
 
@@ -139,7 +140,7 @@ class SpmController extends Controller
                    
                     $action =  '<a href="'.route('admin.spm.edit', $spm->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
                     <a href="/img/'. $spm->image. '" target="_blank" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
-                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    <button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$action.$form_end;

@@ -67,7 +67,7 @@ class KnowledgeController extends Controller
         if($knowledge)
         {
             // Mail::to($invoice->member->user->email)->send(new DepositSubmitMail($invoice));
-            return redirect()->route('member.knowledge.index')->with('success', 'Pengetahuan telah ditambahkan');
+            return redirect()->route('member.knowledge.index');
         }else
         {
             return redirect()->route('member.knowledge.index')->with('warning', 'Pengetahuan gagal ditambahkan');
@@ -112,7 +112,7 @@ class KnowledgeController extends Controller
 
         if($knowledge->update($data))
         {
-            return redirect()->route('member.knowledge.index')->with('success', 'Pengetahuan berhasil diubah');
+            return redirect();
         }else{
             return redirect()->route('member.knowledge.index')->with('warning', 'Pengetahuan gagal diubah');
         }
@@ -128,7 +128,7 @@ class KnowledgeController extends Controller
     {
         $knowledge->delete();
         $knowledge->deleteImage();
-        return redirect()->back()->with('success', 'Pengetahuan berhasil dihapus');
+        return redirect()->back();
     }
 
    
@@ -163,7 +163,7 @@ class KnowledgeController extends Controller
    
                     $action =  '<a href="'.route('member.knowledge.edit', $knowledge->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
                     <a href="/img/'. $knowledge->image. '" target="_blank" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
-                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    <button type="submit"  class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$action.$form_end;

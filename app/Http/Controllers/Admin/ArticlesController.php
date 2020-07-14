@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -21,6 +22,17 @@ class ArticlesController extends Controller
     public function index()
     {
         return view('admin.articles.index');
+    }
+
+    public function indexsemua()
+    {
+        $berita = Article::with('admin.user')->latest()->get();
+        return view('admin.articles.semua',compact('berita'));
+    }
+
+    public function view(Article $article)
+    {
+        return view('admin.articles.view',compact('article'));
     }
 
     /**
@@ -57,7 +69,7 @@ class ArticlesController extends Controller
         $article = Article::create($data);
         if($article)
         {
-            return redirect()->route('admin.articles.index')->with('success', 'Berita berhasil ditambahkan');
+            return redirect()->route('admin.articles.index');
         }else{
             return redirect()->route('admin.articles.index')->with('fail', 'Berita gagal ditambahkan');
         }
@@ -72,7 +84,7 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('article'));
+        return view('admin.articles.edit', compact('articles'));
     }
 
     /**
@@ -98,7 +110,7 @@ class ArticlesController extends Controller
 
         if($article->update($data))
         {
-            return redirect()->route('admin.articles.index')->with('success', 'Berita berhasil diubah');
+            return redirect()->route('admin.articles.index');
         }else{
             return redirect()->route('admin.articles.index')->with('fail', 'Berita gagal diubah');
         }
@@ -114,7 +126,7 @@ class ArticlesController extends Controller
     {
         $article->delete();
         $article->deleteImage();
-        return redirect()->back()->with('success', 'Berita berhasil dihapus');
+        return redirect()->back();
     }
 
 
@@ -136,7 +148,8 @@ class ArticlesController extends Controller
                                     csrf_field().method_field('DELETE');
                    
                     $action =  '<a href="'.route('admin.articles.edit', $articles->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
-                                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    <a href="'.route('admin.articles.view', $articles->id).'" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>
+                                    <button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$action.$form_end;

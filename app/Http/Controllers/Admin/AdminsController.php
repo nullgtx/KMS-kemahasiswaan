@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin;
 use App\User;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -67,7 +68,7 @@ class AdminsController extends Controller
         if($user)
         {
             $user->admin()->create($data);
-            return redirect()->route('admin.admins.index')->with('success', 'Pengguna berhasil ditambahkan');
+            return redirect()->route('admin.admins.index');
         }else{
             return redirect()->route('admin.admins.index')->with('fail', 'Pengguna gagal ditambahkan');
         }
@@ -130,7 +131,7 @@ class AdminsController extends Controller
         if($admin->user()->update($data))
         {
             $admin->update($data);
-            return redirect()->route('admin.admins.index')->with('success', 'Pengguna berhasil diubah');
+            return redirect()->route('admin.admins.index');
         }else{
             return redirect()->route('admin.admins.index')->with('fail', 'Pengguna gagal diubah');
         }
@@ -147,13 +148,13 @@ class AdminsController extends Controller
     {
         if ($admin->user->id == Auth::user()->id)
         {
-            return redirect()->back()->with('fail', 'Anda tidak dapat menghapus akun anda sendiri');
+            return redirect()->back()->with('warning', 'Anda tidak dapat menghapus akun anda sendiri');
         }
 
         $admin->user->deletePhoto();
         $admin->user()->delete();
 
-        return redirect()->back()->with('success', 'Pengguna berhasil dihapus');
+        return redirect()->back();
 
     }
 
@@ -174,7 +175,7 @@ class AdminsController extends Controller
                     $form_start = '<form method="POST" class="form-delete" action="'.route('admin.admins.destroy', $admins->id).'">'.
                                     csrf_field().method_field('DELETE');
                     $form_body = '<a href="'.route('admin.admins.edit', $admins->id).'" class="btn btn-default btn-success"><span class="fa fa-pencil"></span></a>
-                                    <button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                                    <button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     return $form_start.$form_body.$form_end;

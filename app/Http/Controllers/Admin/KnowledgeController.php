@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Knowledge;
+use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -35,7 +36,7 @@ class KnowledgeController extends Controller
     {
         $knowledge->delete();
         $knowledge->deleteImage();
-        return redirect()->back()->with('success', 'Deposit berhasil dihapus');
+        return redirect()->back();
 
     }
 
@@ -46,7 +47,7 @@ class KnowledgeController extends Controller
 
         //Mail::to($deposit->member->user->email)->send(new DepositConfirmedMail($deposit));                
 
-        return redirect()->back()->with('success', 'Pengetahuan berhasil divalidasi');
+        return redirect()->back();
     }
 
     /**
@@ -64,9 +65,9 @@ class KnowledgeController extends Controller
                     $form_start = '<form method="POST" class="form-delete" action="'.route('admin.knowledge.destroy', $knowledge->id).'">'.
                                     csrf_field().method_field('DELETE');
 
-                    $action_acc = '<a href="'.route('admin.knowledge.confirm', $knowledge->id).'" class="btn btn-default btn-button"><span class="fa fa-check"></span> ACC</a> ';
+                    $action_acc = '<a href="'.route('admin.knowledge.confirm', $knowledge->id).'" class="valid btn btn-default btn-button"><span class="fa fa-check"></span> ACC</a> ';
                     $action_view =  '<a href="/img/'. $knowledge->image. '" target="_blank" class="btn btn-default btn-success"><span class="fa fa-eye"></span></a>';
-                    $action_del = '<button type="submit" onclick="return confirm(\'Apakah anda yakin untuk menghapus data ini ?\');" class="btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
+                    $action_del = '<button type="submit" class="hapus btn btn-default btn-danger"><span class="fa fa-trash"></span></button>';
                     $form_end = '</form>';
 
                     if ($knowledge->confirmed==Knowledge::KNOWLEDGE_STATUS_NOT_CONFIRMED)

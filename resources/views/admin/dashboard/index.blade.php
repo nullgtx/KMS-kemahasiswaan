@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,7 +36,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    
             </div>
           </div>
           <!-- ./col -->
@@ -44,14 +44,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{$total_pengetahuan}}</h3>
 
-                <p>Bounce Rate</p>
+                <p>Total Pengetahuan</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             
             </div>
           </div>
           <!-- ./col -->
@@ -59,14 +59,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{$total_forum}}</h3>
 
-                <p>User Registrations</p>
+                <p>Total Forum</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-ios-people"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              
             </div>
           </div>
           <!-- ./col -->
@@ -81,106 +81,113 @@
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              
             </div>
           </div>
           <!-- ./col -->
         </div>
         <!-- /.row -->
-        <!-- Main row -->
-        <div class="row">
+                <!-- Main row -->
+                <div class="row">
           <!-- Left col -->
-          <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
+          <div class="col-md-8">
+            <!-- PRODUCT LIST -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-chart-pie mr-1"></i>
-                  Sales
-                </h3>
-                <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
-                </div>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart"
-                       style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                   </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </section>
-          <!-- /.Left col -->
-          <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          <section class="col-lg-5 connectedSortable">
-            <!-- solid sales graph -->
-            <div class="card bg-gradient-info">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-th mr-1"></i>
-                  Sales Graph
-                </h3>
+                <h3 class="card-title">Berita Terbaru</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
               </div>
-              <div class="card-body">
-                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+              @foreach($berita as $article)
+                <ul class="products-list product-list-in-card pl-2 pr-2">                
+                  <li class="item">
+                    <div class="product-img">
+                      <img src="{{$article->image_url}}" alt="Product Image" class="img-size-50">
+                    </div>
+                    <div class="product-info">
+                      <a href="{{route('admin.articles.view', $article->id)}} class="product-title">{{$article->title}}</a>
+                      <span class="product-description">{{$article->created_at}}</span>
+                    </div>
+                    {!! str_limit ($article->content, 270, ' ...')!!} <a href="{{route('admin.articles.view', $article->id)}}">Lihat detail </a>                   
+            
+                  </li>
+                </ul>
+                @endforeach
               </div>
               <!-- /.card-body -->
-              <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                           data-fgColor="#39CCCC">
-
-                    <div class="text-white">Mail-Orders</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                           data-fgColor="#39CCCC">
-
-                    <div class="text-white">Online</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                           data-fgColor="#39CCCC">
-
-                    <div class="text-white">In-Store</div>
-                  </div>
-                  <!-- ./col -->
-                </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.card-footer -->
             </div>
             <!-- /.card -->
-          </section>
-          <!-- right col -->
+          </div>
+          <!-- /.col -->
+
+          <div class="col-md-4">
+            <!-- PRODUCT LIST -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Pengetahuan Terbaru</h2>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+              @foreach($pengetahuan as $know)
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <li class="item">
+                    <div class="product-img">
+                      <img src="{{$know->member->user->photo_url}}" alt="Product Image" class="img-size-50">
+                    </div>
+                    <div class="product-info">
+                      <a href="{{route('admin.knowledge.index')}}" class="product-title">{{$know->member->user->name}}</a>
+                          @if($know->confirmed=='1')
+                            <span class="badge badge-info float-right">Sudah Tervalidasi</span>
+                              @else
+                              <span class="badge badge-warning float-right">Belum Tervalidasi</span>
+                          @endif
+                      <span class="product-description">
+                      {{$know->title}}
+                      </span>
+                    </div>
+                  </li>
+                  <!-- /.item -->
+                </ul>
+                @endforeach
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- PRODUCT LIST -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Forum Terbaru</h2>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+              @foreach($forum as $frm)
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <li class="item">
+                    <div class="product-img">
+                      <img src="{{$frm->user->photo_url}}" alt="Product Image" class="img-size-50">
+                    </div>
+                    <div class="product-info">
+                      <a href="{{route('admin.forum.view', $frm->id)}}" class="product-title">{{$frm->title}}</a>
+                      <span class="product-description">
+                      {{$frm->user->name}}
+                      </span>
+                    </div>
+                  </li>
+                  <!-- /.item -->
+                </ul>
+                @endforeach
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            
+          </div>
+          
+          <!-- /.col -->
         </div>
-        <!-- /.row (main row) -->
+        <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

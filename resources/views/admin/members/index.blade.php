@@ -2,7 +2,6 @@
 
 @section('content')
     @include('admin.members._header')
-    @include('layouts.dashboard._alert')
 
     
     <div class="container-fluid">
@@ -22,7 +21,7 @@
                                     <thead>
                                             <th>No</th>
                                             <th>NIM</th>
-                                            <th>Nama Member</th>
+                                            <th>Nama Mahasiswa</th>
                                             <th>Email</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
@@ -40,6 +39,35 @@
 @push('scripts')
 <script>
 $(function() {
+    // Delete a record
+    $('#members-table').on('click', 'button.hapus', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+          title: "Yakin?",
+          text: "Menghapus Data Mahasiswa",
+          icon: "warning",
+          buttons: [
+            'Tidak, Batalkan',
+            'Ya, Setuju!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: 'Yey!',
+              text: 'Data Mahasiswa telah dihapus',
+              icon: 'success'
+            }).then(function() {
+              form.submit();
+            });
+          } else {
+            swal("Batal", "Data Mahasiswa batal dihapus :)", "error");
+          }
+        });
+       
+    } );
+
     $('#members-table').DataTable({
         responsive: true,
         processing: true,
