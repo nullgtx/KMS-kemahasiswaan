@@ -16,7 +16,7 @@ class MemberController extends Controller
     public function index(){
         $total_pengetahuan = Knowledge::count();
         $total_pengetahuanku = Knowledge::with('member.user')->fromMember(Auth::user()->member->id)->count();
-        $total_forum = Forum::count();
+        $total_forum = Forum::with('member.user')->fromUser(Auth::user()->id)->count();
         $tidak_valid = Knowledge::with('member.user')->fromMember(Auth::user()->member->id)->where('confirmed',0)->count();
         $berita = Article::orderBy('id','DESC')->take(10)->get();
         $pengetahuan = Knowledge::with('member.user')->fromMember(Auth::user()->member->id)->orderBy('id','DESC')->take(5)->get();

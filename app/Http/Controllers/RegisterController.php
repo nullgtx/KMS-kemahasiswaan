@@ -7,6 +7,7 @@ use UxWeb\SweetAlert\SweetAlert;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisteredEmail;
 
 class RegisterController extends Controller
 {
@@ -16,7 +17,7 @@ class RegisterController extends Controller
 
         $this->validate($request,[
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5',
+            'password' => 'required|min:8',
             'name' => 'required',
             'nim' => 'required|unique:members,nim',
         ]);
@@ -43,7 +44,8 @@ class RegisterController extends Controller
             //create member
             $member = $user->member()->create($data);
             
-            //Mail::to($member->user->email)->send(new WaitingEmail($member));                
+            //kirim email
+            Mail::to($member->user->email)->send(new RegisteredEmail($member));                
             
 
             return redirect()->route('login')->with('success', 'Akun berhasil dibuat');

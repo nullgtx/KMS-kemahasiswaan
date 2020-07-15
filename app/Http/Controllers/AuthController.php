@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotedEmail;
 
 class AuthController extends Controller
 {
@@ -20,7 +22,7 @@ class AuthController extends Controller
     public function ceklogin(Request $request)
     {
         $this->validate($request,[
-            'password' => 'required|min:5',
+            'password' => 'required|min:8',
         ]);
 
         $login =[
@@ -30,7 +32,7 @@ class AuthController extends Controller
 
         if(Auth::attempt($login))
        {
-           return redirect()->route('dashboard');
+           return redirect()->route('dashboard')->with('message', 'Selamat datang di KMS Kemahasiswaan');
        }else {
             return redirect()->route('login')->with('errors', 'Email atau password yang dimasukan salah');
        }
@@ -50,8 +52,28 @@ class AuthController extends Controller
     public function logout() 
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/')->with('message', 'Anda keluar dari KMS Kemahasiswaan');
     }
+
+    public function forgot(Request $request)
+    {
+        if ($request->isMethod('post'))
+        {
+            $this->validate($request,[
+                'email' => 'required|email|exists:users,email',
+            ]);
+            
+            $user = User::where('email', $request->email)->firstOrFail();
+
+            Mail::to($user->email)->send(new ForgotedEmail($user));
+            return redirect()->route('login')->with('success', 'Reset Link telah dikirimkan ke email anda');
+
+        }else {
+            return view('auth.forgot');
+        }
+    }
+
+    
 }
 
     //public function check(Request $request)
