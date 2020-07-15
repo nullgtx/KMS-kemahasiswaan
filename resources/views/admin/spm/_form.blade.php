@@ -14,7 +14,7 @@
 
 <div class="form-group">
         <label for="level">Kategori Pengetahuan</label>
-        <select class="form-control @error('level') is-invalid @enderror" name="level" 
+        <select class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $update ? $spm->level:'') }}" name="level" 
         id="level" @if($update && $spm->admin->user->id==Auth::user()->id) @else required @endif>
             <option value="">-- Pilih Level --</option>
             <option value="{{ \App\Spm::KATEGORI_BEASISWA }}" 

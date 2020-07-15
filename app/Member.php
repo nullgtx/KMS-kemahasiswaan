@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Storage;
 
 class Member extends Model
 {
-    protected $fillable = ['nim', 'user_id'];
+    const MEMBER_LEVEL_ADMIN = 'himpunan';
+    const MEMBER_LEVEL_OPERATOR = 'mahasiswa';
+
+    protected $fillable = ['nim', 'user_id', 'level'];
 
     public function user()
     {
@@ -17,6 +20,11 @@ class Member extends Model
     public function knowledge()
     {
         return $this->hasMany(Knowledge::class);
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
     }
 
 

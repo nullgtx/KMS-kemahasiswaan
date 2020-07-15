@@ -47,7 +47,6 @@ class AdminsController extends Controller
 
         //encrypt password
         $data['password'] = bcrypt($request->password);
-        $data['password_text'] = $request->password;
 
         
         //upload photo

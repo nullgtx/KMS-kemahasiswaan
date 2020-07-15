@@ -109,7 +109,6 @@ class MembersController extends Controller
         if($request->password)
         {
             $data['password'] = bcrypt($request->password);
-            $data['password_text'] = $request->password;
         }
         
         //upload photo

@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\MustBeAdmin::class,
         'operator' => \App\Http\Middleware\MustBeOperator::class,
         'member' => \App\Http\Middleware\MustBeMember::class,
+        'himpunan' => \App\Http\Middleware\MustBeHimpunan::class,
         'sweetalert' => \UxWeb\SweetAlert\ConvertMessagesIntoSweetAlert::class,
     ];
 

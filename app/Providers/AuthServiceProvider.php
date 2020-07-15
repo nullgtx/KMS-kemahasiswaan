@@ -38,9 +38,15 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role===User::USER_ROLE_ADMIN && $user->admin->level===Admin::ADMIN_LEVEL_OPERATOR || $user->role===User::USER_ROLE_ADMIN;
         });
 
+        Gate::define('is_himpunan', function($user)
+        {
+            return $user->role===User::USER_ROLE_MEMBER && $user->member->level===Member::MEMBER_LEVEL_ADMIN;
+        });
+
         Gate::define('is_member', function($user)
         {
-            return $user->role===User::USER_ROLE_MEMBER;
+            return $user->role===User::USER_ROLE_MEMBER && $user->member->level===Member::MEMBER_LEVEL_OPERATOR || $user->role===User::USER_ROLE_MEMBER;
         });
+       
     }
 }

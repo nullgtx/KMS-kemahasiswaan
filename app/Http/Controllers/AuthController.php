@@ -34,7 +34,7 @@ class AuthController extends Controller
        {
            return redirect()->route('dashboard')->with('message', 'Selamat datang di KMS Kemahasiswaan');
        }else {
-            return redirect()->route('login')->with('errors', 'Email atau password yang dimasukan salah');
+            return redirect()->route('login')->with('warning', 'Email atau password yang dimasukan salah');
        }
     }
 

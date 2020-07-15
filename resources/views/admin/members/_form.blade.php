@@ -61,6 +61,24 @@
 </div>
 
 <div class="form-group">
+        <label for="level">Level Akses Pengguna</label>
+        <select class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $update ? $member->level:'') }}" name="level" 
+        id="level" @if($update && $member->user->id==Auth::user()->id) disabled @else required @endif>
+            <option value="">-- Pilih Level --</option>
+            <option value="{{ \App\Member::MEMBER_LEVEL_ADMIN }}" 
+                @if($update && $member->level==\App\Member::MEMBER_LEVEL_ADMIN) selected @endif>Himpunan</option>
+            <option value="{{ \App\Member::MEMBER_LEVEL_OPERATOR }}" 
+                @if($update && $member->level==\App\Member::MEMBER_LEVEL_OPERATOR) selected @endif>Mahasiswa</option>
+        </select>
+
+        @error('level')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
+
+<div class="form-group">
     <label for="active">Foto Pengguna</label>
 
     <div class="media">

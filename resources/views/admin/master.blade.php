@@ -185,32 +185,38 @@
           <li class="nav-item">
             <a href="{{ route('admin.admins.index') }}" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
-              <p class="text">Manajemen Admin</p>
+              <p class="text">Kelola Admin</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.members.index') }}" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
-              <p class="text">Manajemen Mahasiswa</p>
+              <p class="text">Kelola Mahasiswa</p>
             </a>
           </li>
           @else
           <li class="nav-item">
             <a href="{{ route('admin.spm.index') }}" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
-              <p class="text">Manajemen Dokumen SOP</p>
+              <p class="text">Kelola Dokumen SOP</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.kegiatan.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-book"></i>
+              <p class="text">Kelola Dokumen Kegiatan</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.articles.index') }}" class="nav-link">
               <i class="nav-icon fa fa-tachometer"></i>
-              <p class="text">Manajemen Berita</p>
+              <p class="text">Kelola Berita</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.knowledge.index') }}" class="nav-link">
               <i class="nav-icon fa fa-tachometer"></i>
-              <p class="text">Manajemen Pengetahuan</p>
+              <p class="text">Kelola Pengetahuan</p>
             </a>
           </li>
           <li class="nav-item">

@@ -1,8 +1,8 @@
-@extends('admin.master')
+@extends('member.master')
 
 @section('content')
-    @include('admin.members._header')
-
+    
+    @include('member.kegiatan._header')
     
     <div class="container-fluid">
         <div class="row">
@@ -11,24 +11,22 @@
                     <div class="card rounded-0">
                         <div class="card-header">
                             <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                                Data Mahasiswa
+                               Dokumen Kegiatan
                             </h4>
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('admin.members.create') }}" class="btn btn-success" style="margin-bottom: 30px;" ><span class="fa fa-plus"></span> Tambah Data Mahasiswa</a>
+                            <a href="{{ route('member.kegiatan.create') }}" class="btn btn-success" style="margin-bottom: 30px;" ><span class="fa fa-plus"></span> Tambah Dokumen Kegiatan</a>
 
-                            <table class="table table-hover table-sm" id="members-table">
-                                    <thead>
-                                            <th>No</th>
-                                            <th>NIM</th>
-                                            <th>Level</th>
-                                            <th>Nama Mahasiswa</th>
-                                            <th>Email</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                    </thead>
+                            <table class="table table-hover table-sm" id="kegiatan-table">
+                                <thead>
+                                        <th>No</th>
+                                        <th>Author</th>
+                                        <th>Judul Dokumen</th>
+                                        <th>Tanggal Post</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                </thead>
                             </table>
-                            
                         </div>
                     </div>
                 </div>
@@ -41,12 +39,12 @@
 <script>
 $(function() {
     // Delete a record
-    $('#members-table').on('click', 'button.hapus', function (e) {
+    $('#kegiatan-table').on('click', 'button.hapus', function (e) {
         e.preventDefault();
         var form = $(this).parents('form');
         swal({
           title: "Yakin?",
-          text: "Menghapus Data Mahasiswa",
+          text: "Menghapus Dokumen Kegiatan",
           icon: "warning",
           buttons: [
             'Tidak, Batalkan',
@@ -57,32 +55,31 @@ $(function() {
           if (isConfirm) {
             swal({
               title: 'Yey!',
-              text: 'Data Mahasiswa telah dihapus',
+              text: 'Dokumen Kegiatan telah dihapus',
               icon: 'success'
             }).then(function() {
               form.submit();
             });
           } else {
-            swal("Batal", "Data Mahasiswa batal dihapus :)", "error");
+            swal("Batal", "Dokumen Kegiatan batal dihapus :)", "error");
           }
         });
        
     } );
 
-    $('#members-table').DataTable({
-        responsive: true,
+    $('#kegiatan-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('admin.members.data') }}',
+        responsive: true,
+        ajax: '{{ route('member.kegiatan.data') }}',
         columns: [
+            //{ data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-            { data: 'nim', name: 'nim' },
-            { data: 'level', name: 'level' },
-            { data: 'user.name', name: 'user.name' },
-            { data: 'user.email', name: 'user.email' },
+            { data: 'member.user.name', name: 'member.user.name' },
+            { data: 'title', name: 'title' },
+            { data: 'created_at', name: 'created_at' },
             { data: 'status', name: 'status' },
             { data: 'action', name: 'action', orderable: false, searchable: false}
-
         ]
     });
 });

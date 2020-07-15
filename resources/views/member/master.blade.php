@@ -46,7 +46,12 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="index3.html" class="nav-link">Home 
+                      @can('is_himpunan')
+                        Himpunan
+                        @elsecan('is_member')
+                        mahasiswa
+                        @endcan</a>
       </li>
     </ul>
 
@@ -183,6 +188,14 @@
               <p class="text">Berita Kemahasiswaan</p>
             </a>
           </li>
+          @can('is_himpunan')
+          <li class="nav-item">
+            <a href="{{ route('member.kegiatan.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="text">Kegiatan Himpunan</p>
+            </a>
+          </li>
+          @endcan
           <li class="nav-item">
             <a href="{{ route('member.spm.index') }}" class="nav-link">
               <i class="nav-icon fa fa-tachometer"></i>

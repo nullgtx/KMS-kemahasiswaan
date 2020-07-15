@@ -63,7 +63,7 @@
     
     <div class="form-group">
         <label for="level">Level Akses Pengguna</label>
-        <select class="form-control @error('level') is-invalid @enderror" name="level" 
+        <select class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $update ? $admin->level:'') }}" name="level" 
         id="level" @if($update && $admin->user->id==Auth::user()->id) disabled @else required @endif>
             <option value="">-- Pilih Level --</option>
             <option value="{{ \App\Admin::ADMIN_LEVEL_ADMIN }}" 
@@ -81,7 +81,7 @@
 
     <div class="form-group">
         <label for="active">Status Pengguna</label>
-        <select class="form-control @error('active') is-invalid @enderror" name="active" 
+        <select class="form-control @error('active') is-invalid @enderror" value="{{ old('active', $update ? $admin->user->level:'') }}" name="active" 
         id="active" @if($update && $admin->user->id==Auth::user()->id) disabled @else required @endif>
             <option value="">-- Pilih Status Pengguna --</option>
             <option value="{{ \App\User::USER_IS_ACTIVE }}" 

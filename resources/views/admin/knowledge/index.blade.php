@@ -41,34 +41,7 @@
 @push('scripts')
 <script>
 $(function() {
-    // Validasi a record
-    $('#knowledge-table').on('click', 'a.valid', function (e) {
-        e.preventDefault();
-        var form = $(this).parents('form');
-        swal({
-          title: "Yakin?",
-          text: "Validasi Pengetahuan",
-          icon: "warning",
-          buttons: [
-            'Tidak, Batalkan',
-            'Ya, Setuju!'
-          ],
-          dangerMode: true,
-        }).then(function(isConfirm) {
-          if (isConfirm) {
-            swal({
-              title: 'Yey!',
-              text: 'Pengetahuan telah divalidasi',
-              icon: 'success'
-            }).then(function() {
-              form.submit();
-            });
-          } else {
-            swal("Batal", "Pengetahuan batal divalidasi :)", "error");
-          }
-        });
-       
-    } );
+    
     
     // Delete a record
     $('#knowledge-table').on('click', 'button.hapus', function (e) {
