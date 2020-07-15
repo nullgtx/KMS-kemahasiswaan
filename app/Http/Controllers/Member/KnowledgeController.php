@@ -31,6 +31,22 @@ class KnowledgeController extends Controller
         return view('member.knowledge.semua',compact('pengetahuan'));
     }
 
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    	// mengambil data dari table pegawai sesuai pencarian data
+        $pengetahuan = Knowledge::with('member.user')
+        ->where('title','like',"%".$cari."%")
+        ->latest()
+        ->get();
+ 
+    	// mengirim data pegawai ke view index
+		return view('member.knowledge.semua',compact('pengetahuan'));
+ 
+	}
+
     /**
      * Show the form for creating a new resource.
      *
@@ -175,4 +191,7 @@ class KnowledgeController extends Controller
                 ->rawColumns(['status','action'])
                 ->make(true);
     }
+
+    
+
 }

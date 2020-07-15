@@ -136,7 +136,7 @@
                       <img src="{{$know->member->user->photo_url}}" alt="Product Image" class="img-size-50">
                     </div>
                     <div class="product-info">
-                      <a href="{{route('admin.knowledge.index')}}" class="product-title">{{$know->member->user->name}}</a>
+                      <a href="{{route('member.knowledge.index')}}" class="product-title">{{$know->member->user->name}}</a>
                           @if($know->confirmed=='1')
                             <span class="badge badge-info float-right">Sudah Tervalidasi</span>
                               @else
@@ -169,7 +169,7 @@
                       <img src="{{$frm->user->photo_url}}" alt="Product Image" class="img-size-50">
                     </div>
                     <div class="product-info">
-                      <a href="{{route('admin.forum.view', $frm->id)}}" class="product-title">{{$frm->title}}</a>
+                      <a href="{{route('member.forum.view', $frm->id)}}" class="product-title">{{$frm->title}}</a>
                       <span class="product-description">
                       {{$frm->user->name}}
                       </span>

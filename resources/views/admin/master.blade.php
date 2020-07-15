@@ -45,7 +45,12 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="index3.html" class="nav-link">Home 
+                        @can('is_admin')
+                        Administrator
+                        @elsecan('is_operator')
+                        Kemahasiswaan
+                        @endcan </a>
       </li>
     </ul>
 
@@ -176,6 +181,7 @@
               <p class="text">Dashboard</p>
             </a>
           </li>
+          @if(Auth::user()->admin->level=='admin')                      
           <li class="nav-item">
             <a href="{{ route('admin.admins.index') }}" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
@@ -188,6 +194,7 @@
               <p class="text">Manajemen Mahasiswa</p>
             </a>
           </li>
+          @else
           <li class="nav-item">
             <a href="{{ route('admin.spm.index') }}" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
@@ -212,6 +219,8 @@
               <p class="text">Forum Diskusi</p>
             </a>
           </li>
+          @endif
+          
           <li class="nav-item">
             <a href="{{ route('admin.profile.index') }}" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>

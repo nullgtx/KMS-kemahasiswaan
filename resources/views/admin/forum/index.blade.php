@@ -9,9 +9,18 @@
                 <div class="accordion table-data">
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <h4 class="mb-0" data-toggle="collapse" data-target="#balance-chart" aria-expanded="true" aria-controls="table-one">
-                               Forum Diskusi
-                            </h4>
+                            <h3 class="card-title">
+                              <i class="fas fa-chart-pie mr-1"></i>
+                              Forum Diskusi
+                            </h3>
+                            <div class="card-tools">
+                              <!-- SEARCH FORM -->
+                               
+                                <form action="forum/cari" method="GET">
+                                  <input type="text" name="cari" placeholder="Cari forum .." value="{{ old('cari') }}">
+                                  <input type="submit" value="CARI">
+                                </form>
+                            </div>
                         </div>
 
 <div class="card-body">

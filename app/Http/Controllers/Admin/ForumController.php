@@ -25,6 +25,22 @@ class ForumController extends Controller
         return view('admin.forum.index',compact('diskusi'));
     }
 
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    	// mengambil data dari table pegawai sesuai pencarian data
+        $diskusi = Forum::with('user')
+        ->where('title','like',"%".$cari."%")
+        ->latest()
+        ->get();
+ 
+    	// mengirim data pegawai ke view index
+		return view('admin.forum.index',compact('diskusi'));
+ 
+	}
+
     public function view(Forum $forum)
     {
         

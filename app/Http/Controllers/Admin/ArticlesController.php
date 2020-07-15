@@ -84,7 +84,7 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('articles'));
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
