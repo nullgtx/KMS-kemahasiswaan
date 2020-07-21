@@ -13,6 +13,9 @@ class Forum extends Model
 
     const KATEGORI_BEASISWA = 'beasiswa';
     const KATEGORI_PKM = 'pkm';
+    const KATEGORI_TAK = 'tak';
+    const KATEGORI_ASURANSI = 'asuransi';
+    const KATEGORI_KEGIATAN = 'kegiatan';
 
     protected $fillable = ['user_id', 'title', 'content', 'level'];
 

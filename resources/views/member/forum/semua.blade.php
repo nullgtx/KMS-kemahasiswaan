@@ -17,7 +17,7 @@
                             <div class="card-tools">
                               <!-- SEARCH FORM -->
                                
-                                <form action="semuaforum/cari" method="GET">
+                                <form action="{{ route('member.forum.cari') }}" method="GET">
                                   <input type="text" name="cari" placeholder="Cari forum .." value="{{ old('cari') }}">
                                   <input type="submit" value="CARI">
                                 </form>

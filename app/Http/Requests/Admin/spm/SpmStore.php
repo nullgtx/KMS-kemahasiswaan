@@ -26,7 +26,7 @@ class SpmStore extends FormRequest
     {
         return [
             'title' => 'required',
-            'level' => 'required|in:'.Spm::KATEGORI_BEASISWA.','.Spm::KATEGORI_PKM,
+            'level' => 'required|in:'.Spm::KATEGORI_BEASISWA.','.Spm::KATEGORI_PKM.','.Spm::KATEGORI_TAK.','.Spm::KATEGORI_ASURANSI.','.Spm::KATEGORI_KEGIATAN,
             'image' => 'required|mimes:pdf|max:10000',
         ];
     }

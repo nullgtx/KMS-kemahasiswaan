@@ -3,8 +3,7 @@
 @section('content')
     
     @include('admin.spm._header')
-    @include('layouts.dashboard._alert')
-    
+  
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">

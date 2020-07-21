@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Admin;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgotedEmail;
@@ -39,9 +40,11 @@ class AuthController extends Controller
     }
 
     public function cekRole(){
-        if (Auth::user()->role==User::USER_ROLE_ADMIN){
-            return redirect()->route('admin.dashboard');
-        } else if (Auth::user()->role==User::USER_ROLE_MEMBER) {
+        if (Auth::user()->role==User::USER_ROLE_ADMIN && Auth::user()->admin->level===Admin::ADMIN_LEVEL_ADMIN){
+            return redirect()->route('admin.profile.index');
+        }else if (Auth::user()->role==User::USER_ROLE_ADMIN && Auth::user()->admin->level===Admin::ADMIN_LEVEL_OPERATOR) {
+            return redirect()->route('admin.dashboard');   
+        }else if (Auth::user()->role==User::USER_ROLE_MEMBER) {
             return redirect()->route('member.dashboard');
         }
         else{
@@ -52,7 +55,7 @@ class AuthController extends Controller
     public function logout() 
     {
         Auth::logout();
-        return redirect('/')->with('message', 'Anda keluar dari KMS Kemahasiswaan');
+        return redirect('/');
     }
 
     public function forgot(Request $request)

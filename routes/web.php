@@ -15,25 +15,30 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('front.dashboard.index');
 });
-
-Route::get('/coba', function () {
-    return view('auth.daftar');
-});
-
 
 Route::group(['middleware' => ['guest']], function () {    
 	Route::get('login', 'AuthController@login')->name('login');
     Route::post('login', 'AuthController@ceklogin')->name('login');
     Route::get('/register', function(){ return view('auth.daftar'); })->name('register');
     Route::post('/register', 'RegisterController@store')->name('register');
-
     // Password Reset Routes...
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+    //front
+    Route::namespace('Front')->group(function(){
+        Route::get('/', 'DashboardController@index')->name('front.dashboard');
+        Route::get('knowledge/cari', 'KnowledgeController@cari')->name('front.dashboard.cari');
+        Route::get('blog/{article}', 'DashboardController@view')->name('front.dashboard.view');
+        Route::get('knowledge', 'KnowledgeController@index')->name('front.dashboard.knowledge');
+        Route::get('forum', 'ForumController@index')->name('front.dashboard.forum');
+        Route::get('forum/view/{forum}', 'ForumController@view')->name('front.forum.view');
+           
+    });
 
 });
 
@@ -45,10 +50,8 @@ Route::group(['middleware'=>['auth']], function(){
         Route::group(['middleware'=>['admin']],function(){
             Route::namespace('Admin')->group(function(){
                 Route::prefix('admin')->group(function(){
-                    Route::get('/', 'AdminController@index')->name('admin.dashboard');
-
-                    Route::get('profile', 'ProfileController@index')->name('admin.profile.index');
-                    Route::put('profile', 'ProfileController@update')->name('admin.profile.update');
+                    Route::get('/', 'ProfileController@index')->name('admin.profile.index');
+                    Route::put('/', 'ProfileController@update')->name('admin.profile.update');
 
                     Route::resource('admins', 'AdminsController', ['as' => 'admin'])->except('show');
                     Route::get('admins-data', 'AdminsController@data')->name('admin.admins.data');
@@ -86,7 +89,7 @@ Route::group(['middleware'=>['auth']], function(){
 
                     Route::resource('forum', 'ForumController', ['as' => 'admin'])->except('show');
                     Route::get('forum', 'ForumController@index')->name('admin.forum.index');
-                    Route::get('forum/cari', 'ForumController@cari');
+                    Route::get('forum/cari', 'ForumController@cari')->name('admin.forum.cari');
                     Route::get('forum/view/{forum}', 'ForumController@view')->name('admin.forum.view');
                     Route::post('forum/view/{forum}/komentar', 'KomentarController@store')->name('admin.komentar.store');
                     Route::delete('forum/view/{forum}/komentar', 'KomentarController@destroy')->name('admin.komentar.destroy');
@@ -107,14 +110,14 @@ Route::group(['middleware'=>['auth']], function(){
                 Route::resource('knowledge', 'KnowledgeController', ['as' => 'member']);
                 Route::get('knowledge-data', 'KnowledgeController@data')->name('member.knowledge.data');
                 Route::get('semuaknowledge', 'KnowledgeController@indexsatu')->name('member.knowledge.indexsatu');
-                Route::get('semuaknowledge/cari', 'KnowledgeController@cari');
+                Route::get('semuaknowledge/cari', 'KnowledgeController@cari')->name('member.knowledge.cari');
                 Route::get('knowledge-semuadata', 'KnowledgeController@semuadata')->name('member.knowledge.semuadata');
 
                 
                 Route::resource('forum', 'ForumController', ['as' => 'member']);
                 Route::get('forum-data', 'ForumController@data')->name('member.forum.data');
                 Route::get('semuaforum', 'ForumController@indexsatu')->name('member.forum.indexsatu');
-                Route::get('semuaforum/cari', 'ForumController@cari');
+                Route::get('semuaforum/cari', 'ForumController@cari')->name('member.forum.cari');
                 Route::get('semuaforum/view/{forum}', 'ForumController@view')->name('member.forum.view');
                 Route::post('semuaforum/view/{forum}/komentar', 'KomentarController@store')->name('member.komentar.store');
                 Route::delete('semuaforum/view/{forum}/komentar', 'KomentarController@destroy')->name('member.komentar.destroy');
@@ -146,14 +149,14 @@ Route::group(['middleware'=>['auth']], function(){
                 Route::resource('knowledge', 'KnowledgeController', ['as' => 'member']);
                 Route::get('knowledge-data', 'KnowledgeController@data')->name('member.knowledge.data');
                 Route::get('semuaknowledge', 'KnowledgeController@indexsatu')->name('member.knowledge.indexsatu');
-                Route::get('semuaknowledge/cari', 'KnowledgeController@cari');
+                Route::get('semuaknowledge/cari', 'KnowledgeController@cari')->name('member.knowledge.cari');
                 Route::get('knowledge-semuadata', 'KnowledgeController@semuadata')->name('member.knowledge.semuadata');
 
                 
                 Route::resource('forum', 'ForumController', ['as' => 'member']);
                 Route::get('forum-data', 'ForumController@data')->name('member.forum.data');
                 Route::get('semuaforum', 'ForumController@indexsatu')->name('member.forum.indexsatu');
-                Route::get('semuaforum/cari', 'ForumController@cari');
+                Route::get('semuaforum/cari', 'ForumController@cari')->name('member.forum.cari');
                 Route::get('semuaforum/view/{forum}', 'ForumController@view')->name('member.forum.view');
                 Route::post('semuaforum/view/{forum}/komentar', 'KomentarController@store')->name('member.komentar.store');
                 Route::delete('semuaforum/view/{forum}/komentar', 'KomentarController@destroy')->name('member.komentar.destroy');

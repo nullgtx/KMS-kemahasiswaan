@@ -14,13 +14,19 @@
 
 <div class="form-group">
         <label for="level">Kategori Pengetahuan</label>
-        <select class="form-control @error('level') is-invalid @enderror" name="level" 
-        id="level" @if($update && $knowledge->member->user->id==Auth::user()->id)  @else required @endif>
+        <select class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $update ? $knowledge->level:'') }}" name="level" 
+        id="level" required>
             <option value="">-- Pilih Level --</option>
             <option value="{{ \App\Knowledge::KATEGORI_BEASISWA }}" 
                 @if($update && $knowledge->level==\App\Knowledge::KATEGORI_BEASISWA) selected @endif>Beasiswa</option>
             <option value="{{ \App\Knowledge::KATEGORI_PKM }}" 
                 @if($update && $knowledge->level==\App\Knowledge::KATEGORI_PKM) selected @endif>PKM</option>
+            <option value="{{ \App\Knowledge::KATEGORI_TAK }}" 
+                @if($update && $knowledge->level==\App\Knowledge::KATEGORI_TAK) selected @endif>TAK</option>
+            <option value="{{ \App\Knowledge::KATEGORI_ASURANSI }}" 
+                @if($update && $knowledge->level==\App\Knowledge::KATEGORI_ASURANSI) selected @endif>Asuransi</option>
+            <option value="{{ \App\Knowledge::KATEGORI_KEGIATAN }}" 
+                @if($update && $knowledge->level==\App\Knowledge::KATEGORI_KEGIATAN) selected @endif>Kegiatan Mahasiswa</option>
         </select>
 
         @error('level')
@@ -36,7 +42,7 @@
     <div class="media">
         
         <div class="media-body">
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image">
+            <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('level', $update ? $knowledge->image:'') }}" name="image" id="image">
             @if($update) <p class="help-block">Dokumen harus berformat .pdf</p> @endif
 
             @error('image')

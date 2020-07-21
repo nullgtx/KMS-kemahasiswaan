@@ -40,11 +40,13 @@ class ForumController extends Controller
     	// mengambil data dari table pegawai sesuai pencarian data
         $diskusi = Forum::with('user')
         ->where('title','like',"%".$cari."%")
+        ->orwhere('level','like',"%".$cari."%")
         ->latest()
         ->get();
  
-    	// mengirim data pegawai ke view index
-		return view('member.forum.semua',compact('diskusi'));
+    	if(count($diskusi)>0)
+            return view ('member.forum.semua',compact('diskusi'));
+        else return view('member.forum.semua',compact('diskusi'))->with('warning','Masukkan kata kunci atau Topik Diskusi tidak ditemukan');
  
 	}
 
@@ -72,19 +74,10 @@ class ForumController extends Controller
      */
     public function store(ForumStore $request)
     {
-        $data = $request->only(['title', 'content', 'level', 'image']);
+        $data = $request->only(['title', 'content', 'level']);
 
         $data['user_id'] = Auth::user()->id;
         
-        //upload file
-        if($request->image)
-        {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('forum', $filename, 'images');
-        }else{
-            $data['image'] = Forum::FORUM_IMAGE_DEFAULT;
-        }
 
         $forum = Forum::create($data);
         if($forum)
@@ -118,19 +111,9 @@ class ForumController extends Controller
      */
     public function update(ForumUpdate $request, Forum $forum)
     {
-        $data = $request->only(['title', 'content', 'level', 'image']);
+        $data = $request->only(['title', 'content', 'level']);
 
         $data['user_id'] = Auth::user()->id;
-
-        //upload file
-        if($request->image)
-        {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('forum', $filename, 'images');
-        }else{
-            $data['image'] = Forum::FORUM_IMAGE_DEFAULT;
-        }
 
         if($forum->update($data))
         {

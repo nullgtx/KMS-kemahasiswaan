@@ -3,7 +3,7 @@
 @section('content')
 
     @include('admin.knowledge._header')
-    @include('layouts.dashboard._alert')
+
     
     <div class="container-fluid">
         <div class="row">

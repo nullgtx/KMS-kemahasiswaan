@@ -2,7 +2,7 @@
 
 @section('content')
 @include('admin.forum._header')
-@include('layouts.dashboard._alert')
+
 
 <div class="container-fluid">
         <div class="row">

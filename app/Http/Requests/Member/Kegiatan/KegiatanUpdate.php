@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Member\Knowledge;
+namespace App\Http\Requests\Member\Kegiatan;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Knowledge;
+use App\Kegiatan;
 
-class KnowledgeUpdate extends FormRequest
+class KegiatanUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class KnowledgeUpdate extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'required|mimes:pdf|max:10000',
+            'image' => 'mimes:pdf|max:10000',
         ];
     }
 }

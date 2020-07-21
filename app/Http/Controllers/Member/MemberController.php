@@ -19,7 +19,7 @@ class MemberController extends Controller
         $total_forum = Forum::with('member.user')->fromUser(Auth::user()->id)->count();
         $tidak_valid = Knowledge::with('member.user')->fromMember(Auth::user()->member->id)->where('confirmed',0)->count();
         $berita = Article::orderBy('id','DESC')->take(10)->get();
-        $pengetahuan = Knowledge::with('member.user')->fromMember(Auth::user()->member->id)->orderBy('id','DESC')->take(5)->get();
+        $pengetahuan = Knowledge::with('member.user')->orderBy('id','DESC')->take(5)->get();
         $forum = Forum::orderBy('id','DESC')->take(5)->get();
         return view('member.dashboard.index',compact('total_pengetahuan','total_pengetahuanku', 'total_forum', 'tidak_valid', 'berita', 'pengetahuan', 'forum'));
     }

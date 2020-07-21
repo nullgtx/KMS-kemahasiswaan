@@ -33,11 +33,14 @@ class ForumController extends Controller
     	// mengambil data dari table pegawai sesuai pencarian data
         $diskusi = Forum::with('user')
         ->where('title','like',"%".$cari."%")
+        ->orwhere('level','like',"%".$cari."%")
         ->latest()
         ->get();
  
-    	// mengirim data pegawai ke view index
-		return view('admin.forum.index',compact('diskusi'));
+    	if(count($diskusi)>0)
+            return view ('admin.forum.index',compact('diskusi'));
+        else return view('admin.forum.index',compact('diskusi'))->with('warning','Masukkan kata kunci atau Topik diskusi tidak ditemukan');
+ 
  
 	}
 

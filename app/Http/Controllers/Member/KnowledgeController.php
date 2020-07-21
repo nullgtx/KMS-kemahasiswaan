@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Member;
 
 use App\Knowledge;
+use App\User;
+use App\Member;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Member\Knowledge\KnowledgeStore;
 use App\Http\Requests\Member\Knowledge\KnowledgeUpdate;
-use Illuminate\Support\Facades\Mail;
 
 class KnowledgeController extends Controller
 {
@@ -39,11 +40,14 @@ class KnowledgeController extends Controller
     	// mengambil data dari table pegawai sesuai pencarian data
         $pengetahuan = Knowledge::with('member.user')
         ->where('title','like',"%".$cari."%")
+        ->orwhere('level','like',"%".$cari."%")
         ->latest()
         ->get();
  
-    	// mengirim data pegawai ke view index
-		return view('member.knowledge.semua',compact('pengetahuan'));
+        // mengirim data pegawai ke view index
+        if(count($pengetahuan)>0)
+            return view ('member.knowledge.semua',compact('pengetahuan'));
+        else return view('member.knowledge.semua',compact('pengetahuan'))->with('warning','Masukkan kata kunci atau pengetahuan tidak ditemukan');
  
 	}
 
@@ -65,7 +69,7 @@ class KnowledgeController extends Controller
      */
     public function store(KnowledgeStore $request)
     {
-        $data = $request->except('member_id');
+        $data = $request->except(['member_id','image','confirmed']);
         $data['member_id'] = Auth::user()->member->id;
         $data['confirmed'] = Knowledge::KNOWLEDGE_STATUS_NOT_CONFIRMED;
 
@@ -73,10 +77,11 @@ class KnowledgeController extends Controller
         if($request->image)
         {
             $file = $request->image;
+            $current = date('Ymd');
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('knowledge', $filename, 'images');
+            $data['image'] = $file->storeAs('knowledge', $current . '-' .  $filename, 'images');
         }else{
-            $data['image'] = Spm::ARTICLE_IMAGE_DEFAULT;
+            $data['image'] = Knowledge::KNOWLEDGE_IMAGE_DEFAULT;
         }
 
         $knowledge = Knowledge::create($data);
@@ -111,24 +116,23 @@ class KnowledgeController extends Controller
      */
     public function update(knowledgeUpdate $request, Knowledge $knowledge)
     {
-        $data = $request->except('member_id');
+        $data = $request->except(['member_id','image','confirmed']);
         $data['member_id'] = Auth::user()->member->id;
-        $data['confirmed'] = Knowledge::KNOWLEDGE_STATUS_NOT_CONFIRMED;
 
         //upload file
         if($request->image)
         {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('knowledge', $filename, 'images');
             $knowledge->deleteImage();
-        }else{
-            $data['image'] = Knowledge::ARTICLE_IMAGE_DEFAULT;
+            $file = $request->image;
+            $current = date('Ymd');
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('knowledge', $current . '-' .   $filename, 'images');
+
         }
 
         if($knowledge->update($data))
         {
-            return redirect();
+            return redirect()->route('member.knowledge.index');
         }else{
             return redirect()->route('member.knowledge.index')->with('warning', 'Pengetahuan gagal diubah');
         }

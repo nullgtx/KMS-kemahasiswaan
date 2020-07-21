@@ -27,8 +27,6 @@ class ForumUpdate extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'level' => 'required|in:'.Forum::KATEGORI_BEASISWA.','.Forum::KATEGORI_PKM,
-            'image' => 'nullable|image|max:2048',
         ];
     }
 }

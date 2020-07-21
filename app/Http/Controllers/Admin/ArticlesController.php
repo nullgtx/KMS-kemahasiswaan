@@ -60,8 +60,9 @@ class ArticlesController extends Controller
         if($request->image)
         {
             $file = $request->image;
+            $current = date('Ymd');
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('articles', $filename, 'images');
+            $data['image'] = $file->storeAs('articles', $current . '-' .  $filename, 'images');
         }else{
             $data['image'] = Article::ARTICLE_IMAGE_DEFAULT;
         }
@@ -96,16 +97,18 @@ class ArticlesController extends Controller
      */
     public function update(ArticlesUpdate $request, Article $article)
     {
-        $data = $request->except('admin_id');
+        $data = $request->except(['admin_id', 'image']);
         $data['admin_id'] = Auth::user()->admin->id;
 
         //upload photo
         if($request->image)
         {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('articles', $filename, 'images');
             $article->deleteImage();
+            $file = $request->image;
+            $current = date('Ymd');
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('articles', $current . '-' .  $filename, 'images');
+            
         }
 
         if($article->update($data))

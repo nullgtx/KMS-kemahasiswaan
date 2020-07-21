@@ -22,6 +22,13 @@ class RegisterController extends Controller
             'nim' => 'required|unique:members,nim',
         ]);
 
+        $allowed= array("ittelkom-pwt.ac.id", "st3telkom.ac.id");
+
+$domainEmail = explode("@",$request->email)[1];
+if (!in_array($domainEmail,$allowed)){
+	return redirect()->back()->with('warning', 'Bukan email institusi');
+}
+
         $data = $request->all();
 
         //encrypt password
@@ -45,7 +52,7 @@ class RegisterController extends Controller
             $member = $user->member()->create($data);
             
             //kirim email
-            Mail::to($member->user->email)->send(new RegisteredEmail($member));                
+            //Mail::to($member->user->email)->send(new RegisteredEmail($member));                
             
 
             return redirect()->route('login')->with('success', 'Akun berhasil dibuat');

@@ -51,8 +51,9 @@ class SpmController extends Controller
         if($request->image)
         {
             $file = $request->image;
+            $current = date('Ymd');
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('spm', $filename, 'images');
+            $data['image'] = $file->storeAs('spm', $current . '-' .  $filename, 'images');
         }else{
             $data['image'] = Spm::ARTICLE_IMAGE_DEFAULT;
         }
@@ -87,16 +88,18 @@ class SpmController extends Controller
      */
     public function update(SpmUpdate $request, Spm $spm)
     {
-        $data = $request->except('admin_id');
+        $data = $request->except(['admin_id','image']);
         $data['admin_id'] = Auth::user()->admin->id;
 
         //upload file
         if($request->image)
         {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('spm', $filename, 'images');
             $spm->deleteImage();
+            $file = $request->image;
+            $current = date('Ymd');
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('spm', $current . '-' .  $filename, 'images');
+            
         }
 
         if($spm->update($data))

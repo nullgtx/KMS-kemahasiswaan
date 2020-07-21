@@ -26,8 +26,7 @@ class KnowledgeUpdate extends FormRequest
     {
         return [
             'title' => 'required',
-            'level' => 'required|in:'.Knowledge::KATEGORI_BEASISWA.','.Knowledge::KATEGORI_PKM,
-            'image' => 'required|mimes:pdf|max:10000',
+            'image' => 'mimes:pdf|max:10000',
         ];
     }
 }

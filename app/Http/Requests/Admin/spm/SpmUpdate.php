@@ -26,8 +26,7 @@ class SpmUpdate extends FormRequest
     {
         return [
             'title' => 'required',
-            'level' => 'required|in:'.Spm::KATEGORI_BEASISWA.','.Spm::KATEGORI_PKM,
-            'image' => 'required|mimes:pdf|max:10000',
+            'image' => 'mimes:pdf|max:10000',
         ];
     }
 }

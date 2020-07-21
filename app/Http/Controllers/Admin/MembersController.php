@@ -53,8 +53,9 @@ class MembersController extends Controller
         if($request->photo)
         {
             $file = $request->photo;
+            $current = Str::slug($request->nim);
             $filename = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();            
-            $data['photo'] = $file->storeAs('photos', $filename, 'images');
+            $data['photo'] = $file->storeAs('photos', $current . '-' . $filename, 'images');
         }else{
             $data['photo'] = User::USER_PHOTO_DEFAULT;
         }
@@ -115,8 +116,9 @@ class MembersController extends Controller
         if($request->photo)
         {
             $file = $request->photo;
+            $current = Str::slug($request->nim);
             $filename = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();            
-            $data['photo'] = $file->storeAs('photos', $filename, 'images');
+            $data['photo'] = $file->storeAs('photos', $current . '-' . $filename, 'images');
             $member->user->deletePhoto();
         }
 

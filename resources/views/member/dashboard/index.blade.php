@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -125,7 +125,7 @@
             <!-- PRODUCT LIST -->
             <div class="card">
               <div class="card-header">
-                <h2 class="card-title">Pengetahuan Saya</h2>
+                <h2 class="card-title">Pengetahuan Terbaru</h2>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">

@@ -29,12 +29,12 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{$tidak_pengetahuan}}</h3>
 
-                <p>New Orders</p>
+                <p>Pengetahuan Belum Tervalidasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa fa-book"></i>
               </div>
     
             </div>
@@ -49,7 +49,7 @@
                 <p>Total Pengetahuan</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-book"></i>
               </div>
              
             </div>
@@ -74,12 +74,12 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{$tidak_kegiatan}}</h3>
 
-                <p>Unique Visitors</p>
+                <p>Kegiatan Belum Tervalidasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fa fa-book"></i>
               </div>
               
             </div>
@@ -106,16 +106,17 @@
                       <img src="{{$article->image_url}}" alt="Product Image" class="img-size-50">
                     </div>
                     <div class="product-info">
-                      <a href="{{route('admin.articles.view', $article->id)}} class="product-title">{{$article->title}}</a>
+                      <a href="{{route('admin.articles.view', $article->id)}}" class="product-title">{{$article->title}}</a>
                       <span class="product-description">{{$article->created_at}}</span>
                     </div>
-                    {!! str_limit ($article->content, 270, ' ...')!!} <a href="{{route('admin.articles.view', $article->id)}}">Lihat detail </a>                   
+                    {!! Illuminate\Support\Str::limit($article->content, 350)!!} <a href="{{route('admin.articles.view', $article->id)}}"> Lihat detail </a>                   
             
                   </li>
                 </ul>
                 @endforeach
               </div>
               <!-- /.card-body -->
+              {{$berita->links()}}
             </div>
             <!-- /.card -->
           </div>

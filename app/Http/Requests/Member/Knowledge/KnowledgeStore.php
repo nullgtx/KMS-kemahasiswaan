@@ -26,7 +26,7 @@ class KnowledgeStore extends FormRequest
     {
         return [
             'title' => 'required',
-            'level' => 'required|in:'.Knowledge::KATEGORI_BEASISWA.','.Knowledge::KATEGORI_PKM,
+            'level' => 'required|in:'.Knowledge::KATEGORI_BEASISWA.','.Knowledge::KATEGORI_PKM.','.Knowledge::KATEGORI_TAK.','.Knowledge::KATEGORI_ASURANSI.','.Knowledge::KATEGORI_KEGIATAN,
             'image' => 'required|mimes:pdf|max:10000',
         ];
     }

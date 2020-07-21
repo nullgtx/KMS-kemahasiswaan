@@ -27,8 +27,7 @@ class ForumStore extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'level' => 'required|in:'.Forum::KATEGORI_BEASISWA.','.Forum::KATEGORI_PKM,
-            'image' => 'nullable|image|max:2048',
+            'level' => 'required|in:'.Forum::KATEGORI_BEASISWA.','.Forum::KATEGORI_PKM.','.Forum::KATEGORI_TAK.','.Forum::KATEGORI_ASURANSI.','.Forum::KATEGORI_KEGIATAN,
         ];
     }
 }

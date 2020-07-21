@@ -27,13 +27,19 @@
 
 <div class="form-group">
         <label for="level">Kategori Forum</label>
-        <select class="form-control @error('level') is-invalid @enderror" name="level" 
+        <select class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $update ? $forum->level:'') }}"  name="level" 
         id="level" @if($update && $forum->user->id==Auth::user()->id) @else required @endif>
             <option value="">-- Pilih Kategori --</option>
             <option value="{{ \App\Forum::KATEGORI_BEASISWA }}" 
                 @if($update && $forum->level==\App\Forum::KATEGORI_BEASISWA) selected @endif>Beasiswa</option>
             <option value="{{ \App\Forum::KATEGORI_PKM }}" 
                 @if($update && $forum->level==\App\Forum::KATEGORI_PKM) selected @endif>PKM</option>
+            <option value="{{ \App\Forum::KATEGORI_TAK }}" 
+                @if($update && $forum->level==\App\Forum::KATEGORI_TAK) selected @endif>TAK</option>
+            <option value="{{ \App\Forum::KATEGORI_ASURANSI }}" 
+                @if($update && $forum->level==\App\Forum::KATEGORI_ASURANSI) selected @endif>Asuransi</option>
+            <option value="{{ \App\Forum::KATEGORI_KEGIATAN }}" 
+                @if($update && $forum->level==\App\Forum::KATEGORI_KEGIATAN) selected @endif>Kegiatan Mahasiswa</option>
         </select>
 
         @error('level')

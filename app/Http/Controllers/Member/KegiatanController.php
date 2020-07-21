@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Member;
 
 use App\Kegiatan;
+use App\Member;
+use App\User;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,10 +53,11 @@ class KegiatanController extends Controller
         if($request->image)
         {
             $file = $request->image;
+            $current = date('Ymd');
             $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('kegiatan', $filename, 'images');
+            $data['image'] = $file->storeAs('kegiatan', $current . '-' .   $filename, 'images');
         }else{
-            $data['image'] = Spm::ARTICLE_IMAGE_DEFAULT;
+            $data['image'] = Kegiatan::ARTICLE_IMAGE_DEFAULT;
         }
 
         $kegiatan = Kegiatan::create($data);
@@ -89,24 +92,22 @@ class KegiatanController extends Controller
      */
     public function update(KegiatanUpdate $request, Kegiatan $kegiatan)
     {
-        $data = $request->except('member_id');
+        $data = $request->except(['member_id','image', 'confirmed']);
         $data['member_id'] = Auth::user()->member->id;
-        $data['confirmed'] = Kegiatan::KEGIATAN_STATUS_NOT_CONFIRMED;
 
         //upload file
         if($request->image)
         {
-            $file = $request->image;
-            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
-            $data['image'] = $file->storeAs('kegiatan', $filename, 'images');
             $kegiatan->deleteImage();
-        }else{
-            $data['image'] = KEGIATAN::ARTICLE_IMAGE_DEFAULT;
+            $file = $request->image;
+            $current = date('Ymd');
+            $filename = Str::slug($request->title) . '.' . $file->getClientOriginalExtension();            
+            $data['image'] = $file->storeAs('kegiatan', $current . '-' .  $filename, 'images');
         }
 
         if($kegiatan->update($data))
         {
-            return redirect();
+            return redirect()->route('member.kegiatan.index');
         }else{
             return redirect()->route('member.kegiatan.index')->with('warning', 'Dokumen Kegiatan gagal diubah');
         }

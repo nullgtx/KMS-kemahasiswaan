@@ -32,8 +32,9 @@ class ProfileController extends Controller
         if($request->photo)
         {
             $file = $request->photo;
+            $current = time();
             $filename = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();            
-            $data['photo'] = $file->storeAs('photos', $filename, 'images');
+            $data['photo'] = $file->storeAs('photos', $current . '-' .  $filename, 'images');
             $admin->user->deletePhoto();
         }
 
@@ -42,7 +43,7 @@ class ProfileController extends Controller
         if($admin->user()->update($data))
         {
             $admin->update($data);
-            return redirect()->route('admin.profile.index')->with('success', 'Pengguna berhasil diubah');
+            return redirect()->route('admin.profile.index');
         }else{
             return redirect()->route('admin.profile.index')->with('fail', 'Pengguna gagal diubah');
         }

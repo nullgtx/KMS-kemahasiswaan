@@ -16,7 +16,7 @@
                             <div class="card-tools">
                               <!-- SEARCH FORM -->
                                
-                                <form action="semuaknowledge/cari" method="GET">
+                                <form action="{{route('member.knowledge.cari')}}" method="GET">
                                   <input type="text" name="cari" placeholder="Cari pengetahuan .." value="{{ old('cari') }}">
                                   <input type="submit" value="CARI">
                                 </form>
